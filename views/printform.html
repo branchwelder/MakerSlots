@@ -1,55 +1,104 @@
 <html>
 <head>
+  <title>MakerSlots</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel='stylesheet' href='../public/stylesheets/printform.css' />
 </head>
-<body>
-  <form>
-    <br>
-    Name:<br>
-    <input type="text" name="name"><br>
-    <br>
-    Email:<br>
-    <input type="text" name="email"><br>
-    <br>
-    Part Name:<br>
-    <input type="text" name="partname"><br>
-    <br>
-    Purpose:<br>
-    <input type="radio" name="purpose" value="class"> Class/SCOPE<br>
-    <input type="radio" name="purpose" value="research"> Research<br>
-    <input type="radio" name="purpose" value="build"> Project Team or Club<br>
-    <input type="radio" name="purpose" value="passion"> Passionate Pursuit<br>
-    <input type="radio" name="purpose" value="training"> Training<br>
-    <input type="radio" name="purpose" value="personal"> Personal<br>
-    <input type="radio" name="purpose" value="other"> Other: <input type="text" name="purpose-other"><br>
-    <br>
-    What class is this for?<br>
-    <input type="text" name="whatclass"><br>
-    <br>
-    Print Mass:<br>
-    <input type="text" name="mass"><br>
-    <br>
-    Date and Time:<br>
-    <input type="datetime" name="whenprint"><br>
-    <br>
-    Print Duration (IF OVER 6 HOURS PLEASE SEE A NINJA BEFORE PRINTING):<br>
-    <input type="number" name="hours" min="0" max="50"> hours <input type="number" name="minutes" min="0" max="59"> minutes<br>
-    <br>
-    If your print is longer than 6 hours, has a NINJA approved it?<br>
-    <input type="radio" name="approved" value="yes"> Yes<br>
-    <input type="radio" name="approved" value="no"> No<br>
-    <br>
-    Printer:<br>
-    <input type="radio" name="printer" value="merida"> Merida<br>
-    <input type="radio" name="printer" value="elsa"> Elsa<br>
-    <input type="radio" name="printer" value="ariel"> Ariel<br>
-    <input type="radio" name="printer" value="leia"> Leia<br>
-    <input type="radio" name="printer" value="mushu"> Mushu<br> 
-    <input type="radio" name="printer" value="wall-e"> Wall-E<br>
-    <br>
-    Problems?<br>
-    <input type="text" name="problems"><br>
-    <br>
-    <input type="submit" value="Submit">
-  </form>
-</body>
+  <body>
+    <nav class="navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">MakerSlots</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Schedule</a></li>
+          <li><a href="#">Forum</a></li>
+          <li><a href="#">New Print</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 center">
+          <form>
+            <fieldset class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Name">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" placeholder="Email">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="part">Part Name</label>
+              <input type="text" class="form-control" id="part" placeholder="Part Name">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Purpose</label><br>
+              <input type="radio" name="purpose" value="class"> Class/SCOPE<br>
+              <input type="radio" name="purpose" value="research"> Research<br>
+              <input type="radio" name="purpose" value="build"> Project Team or Club<br>
+              <input type="radio" name="purpose" value="passion"> Passionate Pursuit<br>
+              <input type="radio" name="purpose" value="training"> Training<br>
+              <input type="radio" name="purpose" value="personal"> Personal<br>
+              <div class="form-inline">
+                <input type="radio" name="purpose" value="other"> Other: <input type="text" class="form-control numberentry" name="purpose-other">
+              </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="whatclass">What class is this for?</label>
+              <input type="text" class="form-control" id="whatclass">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="mass">Print Mass</label>
+              <input type="text" class="form-control" id="mass" placeholder="Mass">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="whenprint">Date and Time</label>
+              <input type="text" class="form-control" id="whenprint" placeholder="Date and Time">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Print Duration (IF OVER 6 HOURS PLEASE SEE A NINJA BEFORE PRINTING)</label> <br>
+              <div class="form-inline">
+                <input type="number" class="form-control numberentry" name="hours" min="0" max="50"> hours <input class="form-control numberentry" type="number" name="minutes" min="0" max="59"> minutes<br>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>If your print is longer than 6 hours, has a NINJA approved it?</label><br>
+              <input type="radio" name="approved" value="yes"> Yes<br>
+              <input type="radio" name="approved" value="no"> No<br>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Printer</label><br>
+              <input type="radio" name="printer" value="merida"> Merida<br>
+              <input type="radio" name="printer" value="elsa"> Elsa<br>
+              <input type="radio" name="printer" value="ariel"> Ariel<br>
+              <input type="radio" name="printer" value="leia"> Leia<br>
+              <input type="radio" name="printer" value="mushu"> Mushu<br>
+              <input type="radio" name="printer" value="wall-e"> Wall-E<br>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="problems">Problems?</label>
+              <input type="text" class="form-control" id="problems" placeholder="Problems?">
+            </fieldset>
+            <input type="submit" value="Submit" class="btn btn-info btn-lg pull-right">
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

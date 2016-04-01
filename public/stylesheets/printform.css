@@ -1,0 +1,15 @@
+/*.center {
+    text-align:center;
+}*/
+
+.center form {
+    display:inline-block;
+}
+
+body {
+    padding-top: 65px;
+}
+
+.numberentry {
+width: 40%;
+}
