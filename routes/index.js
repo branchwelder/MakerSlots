@@ -1,12 +1,17 @@
 Print = require("../models/printModel")
+var path = require('path'); //path allows the creation of paths (with /) from individual names
 
 routes = {}
 routes.index = function(req, res){
-  res.sendfile("/views/home.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  // res.sendfile("/views/home.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  res.sendfile('/views/home.html', { root: path.join(__dirname, '../') });
+
 };
 
 routes.form = function(req, res){
-  res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
+
 };
 
 routes.submit = function(req, res){
