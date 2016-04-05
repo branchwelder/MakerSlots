@@ -1,0 +1,77 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>3D Print Test</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' href='fc/lib/fullcalendar.min.css' />
+  <script src='fc/lib/jquery.min.js'></script>
+  <script src='fc/lib/moment.min.js'></script>
+  <script src='fc/lib/fullcalendar.min.js'></script>
+ 
+</head>
+<body>
+<div id='calendar'></div>
+<script>
+// we need a jquery file that creates events on the form submission, taking any information for a print and putting it in eventHolder
+// using the same method events are created below, but with the form data instead. Once the calendar is created on webpage load every time,
+// we need to populate it with the events that should be on there, which is handled by the brief for loop at the bottom.
+var eventHolder = []
+$(document).ready(function() {
+///////////////////////////////    
+    var event = {
+     id          : '123',
+     title       : 'testPrint',
+     start       : "Tue, 5 Apr 2016 13:00:00 EST",
+     end         : "Tue, 5 Apr 2016 17:00:00 EST",
+     allDay      : false,
+
+     location    : 'The Arena',
+     description : 'Big Event',
+
+     editable    : false
+    };
+////////////////////////////
+    eventHolder.push(event);
+    var event = {
+     id          : '123',
+     title       : 'testPrint5',
+     start       : "Tue, 5 Apr 2016 10:00:00 EST",
+     end         : "Tue, 5 Apr 2016 12:00:00 EST",
+     allDay      : false,
+
+     location    : 'The Arena',
+     description : 'Big Event',
+
+     editable    : false
+    };
+    eventHolder.push(event);
+
+    $('#calendar').fullCalendar({
+         defaultView: 'agendaWeek'
+    })
+
+    for(var i = 0; i<eventHolder.length; i++){
+    $('.fc').fullCalendar( 'renderEvent', eventHolder[i], true )  // Add Event to fullCalendar
+    };
+
+});
+</script>
+</body>
+</html>
+
+
+
