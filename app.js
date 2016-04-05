@@ -3,8 +3,11 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes');
+var express = require('express'),
+    routes = require('./routes/index.js'),
+    mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/MakerSlot');
 
 var app = module.exports = express.createServer();
 
@@ -20,9 +23,10 @@ app.configure(function(){
 
 
 // Routes
-
 app.get('/', routes.index);
+app.get('/printform', routes.form)
+app.post('/submit', routes.submit)
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.listen(3000, function() {
+  console.log('Node app is running on port', 3000);
 });
