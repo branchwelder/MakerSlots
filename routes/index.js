@@ -14,6 +14,49 @@ routes.form = function(req, res){
 
 };
 
+routes.editPrint = function(req,res){
+  //Updates a print through id, though that could be altered to whatever, probably even on-click, which we should see about doing.
+  //returns all the prints in the database including the edited one as well as the edited text alone.
+  Print.update({
+      _id : req.params.PrintId},{$set:{text: req.body.text}}, function(err, print) {
+        if (err)
+            res.send(err);
+
+        Print.find({}, function(err, prints) {
+            if (err)
+                res.send(err)
+            res.json({Prints: prints, editedPrint: req.body});
+        });
+    });
+}
+
+routes.deletePrint = function(req,res){
+  //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
+  Print.remove({
+     _id : req.params.PrintId
+  }, function(err, removed) {
+      if (err)
+         res.send(err);
+      Print.find(function(err, prints) {
+        if (err)
+          res.send(err)
+
+        res.json(prints);
+               
+                
+      });
+    });  
+}
+
+routes.getPrints = function(req,res){
+  //grabs all prints from database and returns them
+  Print.find({}, function(err,prints) {
+    if(err)
+      res.send(err)
+    res.json(prints)
+  });
+}
+
 routes.submit = function(req, res){
   console.log("Submiting Print")
   entry = req.body
