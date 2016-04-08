@@ -2,11 +2,11 @@ Print = require("../models/printModel")
 
 routes = {}
 routes.index = function(req, res){
-  res.sendfile("/views/home.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  res.sendfile("/views/home.html", {root:'../'})
 };
 
 routes.form = function(req, res){
-  res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  res.sendfile("/views/printform.html", {root:'../'})
 };
 
 routes.submit = function(req, res){
