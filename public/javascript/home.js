@@ -10,18 +10,37 @@ var onSuccess2 = function(data, status) {
   
   // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
 };
-//i want for this to, on click, ask the user if they are trying to edit or delete a print
+//i want this to, on click, ask the user if they are trying to edit or delete a print
 $form1.submit(function(event) {
-  event.preventDefault();
-  var name = $form1.find("[name='custom']").val();
-  var price = $form1.find("[name='customPrice']").val();
-  //var price = 10
-  console.log(name);
-  console.log(price);
+  // var purposes = $("input[name|=purpose]")
+  var purposes = $('input[name=purpose]:checked').val()
+  var name = $("#name").val()
+  var email = $("#email").val()
+  var part = $("#part").val()
+  var whatClass = $("#whatclass").val()
+  var mass = $("#mass").val()
+  var time = $("#whenprint").val()
+  var part = $("#part").val()
+  var hoursDur = $("input[name=hours]").val()
+  var minutesDur = $("input[name=minutes]").val()
+  var approved = $("input[name=approved]").val()
+  var printer = $("input[name=printer]").val()
+
   //var name = $form.find("[name='name']").val();
+
   $.get("add", {
+    purposes: purposes,
     name: name,
-    price: price
+    email: email,
+    part: part,
+    whatClass: whatClass,
+    mass: mass,
+    time: time,
+    part: part,
+    hoursDur: hoursDur,
+    minutesDur: minutesDur,
+    approved: approved,
+    printer: printer
   })
     .done(onSuccess)
     .error(onError);
@@ -35,7 +54,7 @@ $(document).ready(function() {
           },
           height: 800,
           firstDay: 1,
-         defaultView: 'agendaWeek'
+          defaultView: 'agendaWeek'
         
     })
     

@@ -69,6 +69,7 @@ routes.getPrints = function(req,res){
 }
 
 routes.submit = function(req, res){
+  //TODO: edit this to work with jquery
   console.log("Submiting Print")
   entry = req.body
   validEntry = true
