@@ -1,17 +1,65 @@
 Print = require("../models/printModel")
+var path = require('path'); //path allows the creation of paths (with /) from individual names
 
 routes = {}
 routes.index = function(req, res){
-  res.sendfile("/views/home.html", {root:'../'})
+  // res.sendfile("/views/home.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  res.sendfile('/views/home.html', { root: path.join(__dirname, '../') });
+
 };
 
 routes.form = function(req, res){
-  res.sendfile("/views/printform.html", {root:'../'})
+  // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
 };
+
+routes.editPrint = function(req,res){
+  //Updates a print through id, though that could be altered to whatever, probably even on-click, which we should see about doing.
+  //returns all the prints in the database including the edited one as well as the edited text alone.
+  Print.update({
+      _id : req.params.PrintId},{$set:{text: req.body.text}}, function(err, print) {
+        if (err)
+            res.send(err);
+
+        Print.find({}, function(err, prints) {
+            if (err)
+                res.send(err)
+            res.json({Prints: prints, editedPrint: req.body});
+        });
+    });
+}
+
+routes.deletePrint = function(req,res){
+  //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
+  Print.remove({
+     _id : req.params.PrintId
+  }, function(err, removed) {
+      if (err)
+         res.send(err);
+      Print.find(function(err, prints) {
+        if (err)
+          res.send(err)
+
+        res.json(prints);
+               
+                
+      });
+    });  
+}
+
+routes.getPrints = function(req,res){
+  //grabs all prints from database and returns them
+  Print.find({}, function(err,prints) {
+    if(err)
+      res.send(err)
+    res.json(prints)
+  });
+}
 
 routes.submit = function(req, res){
   console.log("Submiting Print")
   entry = req.body
+  console.log(entry)
   validEntry = true
 
   //Checking form requirements
