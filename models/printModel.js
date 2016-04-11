@@ -22,7 +22,8 @@ var printSchema = mongoose.Schema({
     classes: String,
     printMass: Number,
     dateAndTime: String,
-    durration: Number, //In minutes
+    endTime: String,
+    duration: Number, //In minutes
     ninjaApproval: Boolean,
     printer: String,
     problems: String

@@ -26,6 +26,7 @@ app.configure(function(){
 app.get('/', routes.index);
 app.get('/printform', routes.form)
 app.get('/prints', routes.getPrints)
+app.get('/add', routes.submit)
 
 app.listen(3000, function() {
   console.log('Node app is running on port', 3000);
