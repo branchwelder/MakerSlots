@@ -11,6 +11,7 @@ routes.index = function(req, res){
 routes.form = function(req, res){
   // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
   res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
+
 };
 
 routes.editPrint = function(req,res){
@@ -47,31 +48,41 @@ routes.deletePrint = function(req,res){
     });  
 }
 
+
+
 routes.getPrints = function(req,res){
   //grabs all prints from database and returns them
   Print.find({}, function(err,prints) {
     if(err)
       res.send(err)
-    res.json(prints)
+    var events = [];
+    for (var i = 0;i<prints.length; i++) {
+      // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user 
+      // var start = prints[i].dateAndTime
+      // var end = prints[i].endTime
+      var event = {title: prints[i].name + 'printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].endTime};
+      events.push(event)
+    }
+
+    res.json(events)
   });
 }
 
 routes.submit = function(req, res){
   console.log("Submiting Print")
   entry = req.body
-  console.log(entry)
   validEntry = true
 
   //Checking form requirements
   requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass, 
-                  entry.dateAndTime, entry.durration, entry.printer]
+                  entry.dateAndTime, entry.duration, entry.printer]
   for(i=0;i<requirements.length;i++){
     if(!requirements[i]){
       validEntry = false
       res.status(500).send("Required form field was empty")
     }
   }
-  if(entry.durration>360 && !entry.ninjaApproval){
+  if(entry.duration>360 && !entry.ninjaApproval){
     validEntry = false
     res.status(500).send("Cannot have 6 hr print without ninja approval")
   }
