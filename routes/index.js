@@ -11,7 +11,6 @@ routes.index = function(req, res){
 routes.form = function(req, res){
   // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
   res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
-
 };
 
 routes.editPrint = function(req,res){
@@ -60,6 +59,7 @@ routes.getPrints = function(req,res){
 routes.submit = function(req, res){
   console.log("Submiting Print")
   entry = req.body
+  console.log(entry)
   validEntry = true
 
   //Checking form requirements

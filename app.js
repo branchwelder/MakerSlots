@@ -5,7 +5,9 @@
 
 var express = require('express'),
     routes = require('./routes/index.js'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    verification = require('./verification.js')
+
 
 mongoose.connect('mongodb://localhost/MakerSlot');
 
@@ -27,6 +29,8 @@ app.get('/', routes.index);
 app.get('/printform', routes.form)
 app.get('/prints', routes.getPrints)
 app.get('/add', routes.submit)
+
+app.post('/submit', routes.submit)
 
 app.listen(3000, function() {
   console.log('Node app is running on port', 3000);
