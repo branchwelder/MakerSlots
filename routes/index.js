@@ -49,7 +49,8 @@ routes.deletePrint = function(req,res){
 }
 
 
-
+//this needs to be edited so that theres an end time, and maybe take out duration as a result. we can probably calculate duration based on start
+//and end time.
 routes.getPrints = function(req,res){
   //grabs all prints from database and returns them
   Print.find({}, function(err,prints) {
@@ -69,9 +70,9 @@ routes.getPrints = function(req,res){
 }
 
 routes.submit = function(req, res){
-  //TODO: edit this to work with jquery
   console.log("Submiting Print")
-  entry = req.body
+  // entry = req.body
+  entry = req.query
   validEntry = true
 
   //Checking form requirements
