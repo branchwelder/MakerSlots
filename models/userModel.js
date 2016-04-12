@@ -3,8 +3,9 @@ var mongoose = require('mongoose');
 // Create a wiki page schema
 var userSchema = mongoose.Schema({
     name: String,
-    username: String,
-    password: String,
+    printHist: String,
+    forumHist: String,
+    isNinja: Boolean,
     email: String
 });
 
