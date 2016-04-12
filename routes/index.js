@@ -77,7 +77,7 @@ routes.submit = function(req, res){
 
   //Checking form requirements
   requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass, 
-                  entry.dateAndTime, entry.duration, entry.printer]
+                  entry.dateAndTime, entry.finish, entry.duration, entry.printer]
   for(i=0;i<requirements.length;i++){
     if(!requirements[i]){
       validEntry = false
