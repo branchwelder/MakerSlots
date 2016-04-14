@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
 </head>
-<body>
+  <body>
     <nav class="navbar-dark bg-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -27,16 +27,16 @@
     </nav>
     <br>
       <form id="login-form" action="userLogin" method="POST">
-      Login with email:<br>
-      <input type="text" name="userNameLogin"> <br>
-      <input type="text" name="passwordLogin"> <br>
+      Login:<br>
+      <input type="text" name="userNameLogin" value="email"> <br>
+      <input type="text" name="passwordLogin" value="password"> <br>
       <input type="submit" value="Login"> <br>
       </form>
     <br>
       <form id="new-user-form" action="userCreate" method="POST">
       Create new Account:<br>
-      <input type="text" name="userNameLogin"> <br>
-      <input type="text" name="passwordLogin"> <br>
+      <input type="text" name="userNameLogin" value="email"> <br>
+      <input type="text" name="passwordLogin" value="password"> <br>
       <input type="submit" value="Create Account"> <br>
     </form>
   </body>

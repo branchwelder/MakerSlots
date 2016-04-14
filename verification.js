@@ -1,6 +1,7 @@
 User = require('./models/userModel')
 var passport = require('passport')
 var LocalStrategy = require('passport-local')
+var bcrypt = require('bcrypt')
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -12,17 +13,14 @@ passport.deserializeUser(function(obj, done) {
 passport.use('local-signin', new LocalStrategy(
   {username:'name', passReqToCallback:true},
   function(req, username, password, done) {
-    var hash = crypto
-      .createHash("md5")
-      .update(password)
-      .digest('hex');
+  	console.log("Signing someone in.")
     User.findOne({ name: username }, function (err, user) {
       if (err) { return done(err); }
       else if (!user) {
         req.session.error("User does not exist")
       	done(null, false)
       }
-      else if (user.passwordHash !== hash) { 
+      else if (!user.validPassowrd(password)) { 
         req.session.error("Incorrect password")
       	return done(null, false); 
       }
@@ -36,24 +34,23 @@ passport.use('local-signin', new LocalStrategy(
 passport.use('local-signup', new LocalStrategy(
   {username:'name', passReqToCallback:true},
   function(req, username, password, done) {
-    var hash = crypto
-      .createHash("md5")
-      .update(password)
-      .digest('hex');
-    User.findOne({ name: username }, function (err, user) {
-      if (err) { return done(err); }
+  	console.log("Checking login stuff.")
+    User.find({ name: username }, function (err, user) {
+      if (err) { return done(err); console.log(err)}
       else if(user){
         //If someone already has the username
         req.session.error = "That username is already in use"
         return done(null, false)
+        console.log("User already exists")
       }
       else{
         userinfo = req.body.user
         user = new User({name:userinfo.name,
                          email:userinfo.email,
-                         passwordHash: hash
+                         password: user.generateHash(password),
                          isNinja: False})
         return done(null, false)
+        console.log("User created.")
       }
     })
   }
