@@ -61,7 +61,7 @@ routes.getPrints = function(req,res){
       // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user 
       // var start = prints[i].dateAndTime
       // var end = prints[i].endTime
-      var event = {title: prints[i].name + 'printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].endTime};
+      var event = {title: prints[i].name + 'printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish};
       events.push(event)
     }
 
@@ -77,7 +77,7 @@ routes.submit = function(req, res){
 
   //Checking form requirements
   requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass, 
-                  entry.dateAndTime, entry.duration, entry.printer]
+                  entry.dateAndTime, entry.finish, entry.duration, entry.printer]
   for(i=0;i<requirements.length;i++){
     if(!requirements[i]){
       validEntry = false
