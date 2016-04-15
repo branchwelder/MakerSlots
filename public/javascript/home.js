@@ -1,6 +1,8 @@
 console.log("loading home.js");
 var onSuccess = function(data, status) {
   console.log('tried to edit/delete');
+
+
 };
 var onSuccess2 = function(data, status) {
   console.log('tried to populate the calendar');
@@ -15,11 +17,13 @@ var onSuccess2 = function(data, status) {
 var onError = function(data, status) {
   console.log("status", status);
   console.log("error", data);
+  console.log("shits broke yo");
 };
 
 //i want this to, on click, ask the user if they are trying to edit or delete a print
 // $form1.submit(function(event) {
 $("#printForm").submit(function(event) {
+  event.preventDefault();
   // var purposes = $("input[name|=purpose]")
   var purposes = $('input[name=purpose]:checked').val();
   var name = $("#name").val();
@@ -35,6 +39,7 @@ $("#printForm").submit(function(event) {
   var approved = $("input[name=approved]").val();
   var printer = $("input[name=printer]").val();
   var duration = hoursDur*60 + minutesDur;
+  window.location = "/";
   //var name = $form.find("[name='name']").val();
 
   $.get("add", {
@@ -55,26 +60,3 @@ $("#printForm").submit(function(event) {
     .error(onError);
 });
 
-//this one will populate the calendar
-$(document).ready(function() {
-    $('#calendar').fullCalendar({
-          eventClick: function() {
-           alert('an event has been clicked!');
-          },
-          height: 800,
-          firstDay: 1,
-          defaultView: 'agendaWeek'
-        
-    })
-    
-    var calendar = $('#calendar').fullCalendar('getCalendar');
-    calendar.on('dayClick', function(date, jsEvent, view) {
-      alert('clicked on ' + date.format());
-    });
-// this part on needs to be in success function
-    
-  $.get("prints", {
-  })
-    .done(onSuccess2)
-    .error(onError);
-});
