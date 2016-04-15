@@ -3,12 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "bcrypt": "0.7.x",
+    "cookie-parser": "^1.4.1",
     "express": "2.5.8",
     "express-session": "^1.13.0",
     "jade": ">= 0.0.1",
     "mongoose": "^4.4.8",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "bcrypt": "0.7.x"
+    "passport-local": "^1.0.0"
   }
 }
