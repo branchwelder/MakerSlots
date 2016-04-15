@@ -68,7 +68,12 @@ passport.use('local-signup', new LocalStrategy(
 ));
 // test authentication
 var ensureAuthenticated = function(req, res, next) {
-  if (req.isAuthenticated()) { return next(req, res); }
+  if (req.isAuthenticated()) { 
+    return next(req, res); }
+  else{
+    // res.send("please log in");
+    res.redirect('/login');
+  }
   res.status(401);
 }
 functions = {"ensureAuthenticated": ensureAuthenticated}

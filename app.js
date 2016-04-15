@@ -32,7 +32,8 @@ app.use(app.router);
 
 
 // Routes
-app.get('/', routes.index);
+// app.get('/', routes.index);
+app.get('/', function(req, res){verification.ensureAuthenticated(req, res, routes.index)})
 app.get('/printform', function(req, res){verification.ensureAuthenticated(req, res, routes.form)})
 app.get('/prints', routes.getPrints)
 app.get('/add', routes.submit)
@@ -58,7 +59,7 @@ app.post('/userCreate', passport.authenticate('local-signup',{
 	}
 )
 
-app.post('/submit', routes.submit)
+app.post('/submit', function(req,res){console.log("stahp")})
 
 //Run verification code and import its important functions.
 var verification = require('./verification.js');
