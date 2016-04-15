@@ -1,6 +1,7 @@
+console.log("loading home.js");
 var onSuccess = function(data, status) {
   console.log('tried to edit/delete');
-
+};
 var onSuccess2 = function(data, status) {
   console.log('tried to populate the calendar');
   console.log(data);
@@ -10,8 +11,15 @@ var onSuccess2 = function(data, status) {
   
   // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
 };
+
+var onError = function(data, status) {
+  console.log("status", status);
+  console.log("error", data);
+};
+
 //i want this to, on click, ask the user if they are trying to edit or delete a print
-$form1.submit(function(event) {
+// $form1.submit(function(event) {
+$("#printForm").submit(function(event) {
   // var purposes = $("input[name|=purpose]")
   var purposes = $('input[name=purpose]:checked').val();
   var name = $("#name").val();

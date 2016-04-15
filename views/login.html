@@ -3,6 +3,8 @@
   <title>MakerSlots</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 </head>
   <body>
     <nav class="navbar-dark bg-inverse navbar-fixed-top">
@@ -26,18 +28,19 @@
         </ul>
     </nav>
     <br>
-      <form id="login-form" action="userLogin" method="POST">
+      <form id="login-form">
       Login:<br>
       <input type="text" name="userNameLogin" value="email"> <br>
       <input type="text" name="passwordLogin" value="password"> <br>
       <input type="submit" value="Login"> <br>
       </form>
     <br>
-      <form id="new-user-form" action="userCreate" method="POST">
+      <form id="new-user-form">
       Create new Account:<br>
-      <input type="text" name="userNameLogin" value="email"> <br>
-      <input type="text" name="passwordLogin" value="password"> <br>
+      <input type="text" name="userNameCreate" value="email"> <br>
+      <input type="text" name="passwordCreate" value="password"> <br>
       <input type="submit" value="Create Account"> <br>
     </form>
+  <script type="text/javascript" src="javascript/logs.js"></script>
   </body>
 </html>
