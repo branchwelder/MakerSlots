@@ -74,6 +74,7 @@ routes.submit = function(req, res){
   // entry = req.body
   entry = req.query
   validEntry = true
+  // console.log(entry.finish)
 
   //Checking form requirements
   requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass, 
@@ -91,6 +92,7 @@ routes.submit = function(req, res){
   /////////////////////////
 
   if (validEntry){
+    console.log(entry);
     form = new Print(entry)
     form.save(function(err){
     	if(err){
