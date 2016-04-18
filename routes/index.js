@@ -70,6 +70,10 @@ routes.editForm = function(req, res){
 
 };
 
+routes.schedule = function(req,res){
+  res.sendfile('/views/schedule.html', { root: path.join(__dirname, '../') });
+}
+
 routes.editCall = function(req, res){
   console.log(req.query.id);
   Print.findById(req.query.id, function (err, print) {

@@ -39,6 +39,7 @@ app.get('/prints', routes.getPrints)
 app.get('/add', routes.submit)
 app.get('/editForm', routes.editForm)
 app.get('/editCall', routes.editCall)
+app.get('/schedule', routes.schedule)
 
 //Forum routes
 app.get('/forum', routes.dex)
