@@ -42,10 +42,10 @@ routes.deletePrint = function(req,res){
           res.send(err)
 
         res.json(prints);
-               
-                
+
+
       });
-    });  
+    });
 }
 
 
@@ -58,7 +58,7 @@ routes.getPrints = function(req,res){
       res.send(err)
     var events = [];
     for (var i = 0;i<prints.length; i++) {
-      // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user 
+      // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user
       // var start = prints[i].dateAndTime
       // var end = prints[i].endTime
       var event = {title: prints[i].name + 'printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish};
@@ -77,7 +77,7 @@ routes.submit = function(req, res){
   // console.log(entry.finish)
 
   //Checking form requirements
-  requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass, 
+  requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass,
                   entry.dateAndTime, entry.finish, entry.duration, entry.printer]
   for(i=0;i<requirements.length;i++){
     if(!requirements[i]){
@@ -103,6 +103,10 @@ routes.submit = function(req, res){
     	  }
     })
   }
+}
+
+routes.forum = function(req, res) {
+  res.sendfile('/views/forum.html', { root: path.join(__dirname, '../') });
 }
 
 module.exports = routes
