@@ -54,32 +54,13 @@
             <button type="submit" class="btn btn-primary pull-xs-right" ng-click="createPost()">Submit</button>
           </form>
           <br><br><br>
-          <div class="card">
-            <div class="card-block">
-              <h5 class="card-title">How large of an overhang can the Makerbots handle?<small class="text-muted"> - Hannah Twigg-Smith</small></h5>
-              <h6><span class="label label-primary label-pill">Printer Function</span> <span class="label label-danger label-pill">SolidWorks</span> <span class="label label-success label-pill">General Questions</span><small class="text-muted"> Posted 3/14/16 </small></h6>
-              <p class="card-text">The most merciful thing in the world, I think, is the inability of the human mind to correlate all its contents. We live on a placid island of ignorance in the midst of black seas of infinity, and it was not meant that we should voyage far. The sciences, each straining in its own direction, have hitherto harmed us little; but some day the piecing together of dissociated knowledge will open up such terrifying vistas of reality, and of our frightful position therein, that we shall either go mad from the revelation or flee from the light into the peace and safety of a new dark age ... <a href="#" class="card-link">View</a></p>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-block">
-              <h5 class="card-title">Having a hard time with the test piece<small class="text-muted"> - Gabe Butterick</small></h5>
-              <h6><span class="label label-danger label-pill">SolidWorks</span> <span class="label label-info label-pill">Training</span><small class="text-muted"> Posted 3/2/16 </small></h6>
-              <p class="card-text">The most merciful thing in the world, I think, is the inability ... <a href="#" class="card-link">View</a></p>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-block">
-              <h5 class="card-title">How large of an overhang can the Makerbots handle?<small class="text-muted"> - Hannah Twigg-Smith</small></h5>
-              <h6><span class="label label-primary label-pill">Printer Function</span> <span class="label label-warning label-pill">NINJAs</span> <small class="text-muted"> Posted 3/14/16 </small></h6>
-              <p class="card-text">The most merciful thing in the world, I think, is the inability of the human mind to correlate all its contents. We live on a placid island of ignorance in the midst ... <a href="#" class="card-link">View</a></p>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-block">
-              <h5 class="card-title">Help! I spilled coffee all over Elsa!<small class="text-muted"> - Hannah Twigg-Smith</small></h5>
-              <h6><span class="label label-primary label-pill">Printer Function</span> <span class="label label-default label-pill">Other</span><small class="text-muted"> Posted 3/14/16 </small></h6>
-              <p class="card-text">The most merciful thing in the world, I think, is the inability of the human mind to correlate all its contents. We live on a placid island of ignorance in the midst of black seas of infinity, and it was not meant that we should voyage far. The sciences, each straining in its own direction, have hitherto harmed us little; but some day the piecing together of dissociated knowledge will open up such terrifying vistas of reality, and of our frightful position therein, that we shall either go mad from the revelation or flee from the light into the peace and safety of a new dark age ... <a href="#" class="card-link">View</a></p>
+
+          <div ng-repeat="post in posts">
+            <div class="card">
+              <div class="card-block">
+                <h5 class="card-title"> {{post.title}} <small class="text-muted"> - Username</small></h5>
+                <p class="card-text"> {{post.content}} <a href="#" class="card-link">View</a></p>
+              </div>
             </div>
           </div>
         </div>

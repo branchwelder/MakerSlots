@@ -41,8 +41,9 @@ app.get('/editForm', routes.editForm)
 app.get('/editCall', routes.editCall)
 
 //Forum routes
-app.get('/forum', routes.forum)
+app.get('/forum', routes.dex)
 app.get('/getPosts', routes.getforumposts)
+
 app.post('/newPost', routes.newforumpost)
 
 //Login/logout routes

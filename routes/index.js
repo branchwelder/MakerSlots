@@ -14,24 +14,23 @@ routes.index = function(req, res){
 // FORUM ROUTES
 
 function getPosts(res) {
-    Forum.find(function (err, todos) {
+    Forum.find(function (err, posts) {
         if (err) {
             res.send(err);
         }
-        res.json(todos);
+        res.json(posts);
     });
-}
-;
+};
 
-routes.forum = function(req, res) {
+routes.dex = function(req, res) {
   res.sendfile('/views/forum.html', { root: path.join(__dirname, '../') });
 }
 
+
 routes.newforumpost = function(req, res){
   Forum.create({
-    text: req.body.text,
-    title: req.body.title,
-    user: req.body.user
+    content: req.body.content,
+    title: req.body.title
   }, function(err, forum) {
         if (err) {
           res.send(err)

@@ -30,7 +30,7 @@ function mainController($scope, $http) {
     $scope.formData = {};
 
     // show the todos
-    $http.get('/forum')
+    $http.get('/getPosts')
         .success(function(data) {
             $scope.posts = data;
             console.log(data);
@@ -39,12 +39,12 @@ function mainController($scope, $http) {
             console.log('Error: ' + data);
         });
 
-    // on form submit create new todo and updata data
+    // on form submit create new todo and update data
     $scope.createPost = function() {
         $http.post('/newPost', $scope.formData)
             .success(function(data) {
                 $scope.formData = {}; // clear the form so our user is ready to enter another
-                $scope.todos = data;
+                $scope.posts = data;
                 console.log(data);
             })
             .error(function(data) {
