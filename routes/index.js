@@ -4,24 +4,59 @@ var path = require('path'); //path allows the creation of paths (with /) from in
 
 routes = {}
 
+
 routes.index = function(req, res){
   // res.sendfile("/views/home.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
   res.sendfile('/views/home.html', { root: path.join(__dirname, '../') });
 
 };
 
-routes.newforumpost = function(req, res){
-  forum = new Forum(req.query)
-  forum.save(function(err){
-    if(err){
-        res.status(500).send("Forum post not saved correctly");}
-      else{
-        res.send()
-        console.log("Forum post submitted")
-      }
-  })
+// FORUM ROUTES
 
+function getPosts(res) {
+    Forum.find(function (err, todos) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(todos);
+    });
 }
+;
+
+routes.forum = function(req, res) {
+  res.sendfile('/views/forum.html', { root: path.join(__dirname, '../') });
+}
+
+routes.newforumpost = function(req, res){
+  Forum.create({
+    text: req.body.text,
+    title: req.body.title,
+    user: req.body.user
+  }, function(err, forum) {
+        if (err) {
+          res.send(err)
+        };
+
+        Forum.find(function(err, posts) {
+          if (err) {
+            res.send(err)
+          };
+        getPosts(res);
+        });
+      }
+  );
+};
+
+routes.getforumposts = function(req, res) {
+  Forum.find(function(err, posts) {
+    if (err) {
+      res.send(err)
+    }
+    res.json(posts);
+  });
+};
+
+// END FORUM ROUTES
 
 routes.form = function(req, res){
   // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
@@ -132,10 +167,6 @@ routes.submit = function(req, res){
     	  }
     })
   }
-}
-
-routes.forum = function(req, res) {
-  res.sendfile('/views/forum.html', { root: path.join(__dirname, '../') });
 }
 
 module.exports = routes

@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var forumSchema = mongoose.Schema({
     user: String,
     content: String,
+    title: String,
     comments: Array //array of objects containing information about comments
 });
 

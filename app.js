@@ -37,10 +37,15 @@ app.get('/', function(req, res){verification.ensureAuthenticated(req, res, route
 app.get('/printform', function(req, res){verification.ensureAuthenticated(req, res, routes.form)})
 app.get('/prints', routes.getPrints)
 app.get('/add', routes.submit)
-app.get('/forum', routes.forum)
 app.get('/editForm', routes.editForm)
 app.get('/editCall', routes.editCall)
 
+//Forum routes
+app.get('/forum', routes.forum)
+app.get('/getPosts', routes.getforumposts)
+app.post('/newPost', routes.newforumpost)
+
+//Login/logout routes
 app.get('/login', userroutes.login)
 app.get('/logout', userroutes.logout)
 app.get('/check', function(req,res){
