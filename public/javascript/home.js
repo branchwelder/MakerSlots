@@ -1,15 +1,9 @@
 console.log("loading home.js");
 var onSuccess = function(data, status) {
-  console.log('tried to edit/delete');
+  console.log('added post');
 
 
 };
-var onSuccess2 = function(data, status) {
-  console.log('tried to populate the calendar');
-  console.log(data);
-  for(var i = 0; i<data.length; i++){
-    $('.fc').fullCalendar( 'renderEvent', data[i], true )  // Add Event to fullCalendar
-  };
   
   // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
 };

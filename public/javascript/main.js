@@ -1,26 +1,27 @@
 //populates calendar, autofills form for edits
 var onSuccess = function(data, status) {
-  // window.location = "/editForm";
+  window.location = "/editForm";
   console.log("data printed below");
-  console.log(data);
+  console.log(data.name);
   console.log("data printed above");
-  
+  $(document).ready(function(){
+    console.log("document readied");
     // $('input[value='+data.purpose+']').prop('checked',true); 
-    // $("#name").replaceWith('<input type="text" class="form-control" id="name" value="'+data.name+'">');
-    // $("#email").replaceWith('<input type="text" class="form-control" id="email" value="'+data.email+'">');
-    // $("#part").replaceWith('<input type="text" class="form-control" id="part" value="'+data.part+'">');
-    // $("#whatclass").replaceWith('<input type="text" class="form-control" id="whatclass" value="'+data.classes+'">');
-    // $("#mass").replaceWith('<input type="text" class="form-control" id="mass" value="'+data.mass+'">');
+    $("#name").replaceWith('<input type="text" class="form-control" id="name" value="'+data.name+'">');
+    $("#email").replaceWith('<input type="text" class="form-control" id="email" value="'+data.email+'">');
+    $("#part").replaceWith('<input type="text" class="form-control" id="part" value="'+data.part+'">');
+    $("#whatclass").replaceWith('<input type="text" class="form-control" id="whatclass" value="'+data.classes+'">');
+    $("#mass").replaceWith('<input type="text" class="form-control" id="mass" value="'+data.mass+'">');
     
-    // $("#whenprint").replaceWith('<input type="text" class="form-control" id="whenprint" value="'+data.dateAndTime+'">');
-    // // $("#whendone").replaceWith('<input type="text" class="form-control" id="whendone" value="'data.finish'">');
-    // // $("input[name=hours]").replaceWith('<input type="number" class="form-control numberentry" name="hours" min="0" max="50" value="'+data.+'">')
-    // // var minutesDur = $("input[name=minutes]").val();
-    // //these two above are left out because they cant be proccessed correctly.
+    $("#whenprint").replaceWith('<input type="text" class="form-control" id="whenprint" value="'+data.dateAndTime+'">');
+    // $("#whendone").replaceWith('<input type="text" class="form-control" id="whendone" value="'data.finish'">');
+    // $("input[name=hours]").replaceWith('<input type="number" class="form-control numberentry" name="hours" min="0" max="50" value="'+data.+'">')
+    // var minutesDur = $("input[name=minutes]").val();
+    //these two above are left out because they cant be proccessed correctly.
 
-    // $("input[value="+data.approved+"]").prop('checked',true);
-    // $('input[value='+data.printer+']').prop('checked',true);
-  
+    $("input[value="+data.approved+"]").prop('checked',true);
+    $('input[value='+data.printer+']').prop('checked',true);
+  })
 };
 var onSuccess2 = function(data, status) {
   console.log('tried to populate the calendar');
