@@ -71,9 +71,11 @@ routes.editForm = function(req, res){
 };
 
 routes.editCall = function(req, res){
-  Print.findById(req.id, function (err, print) {
+  console.log(req.query.id);
+  Print.findById(req.query.id, function (err, print) {
     if(err)
       res.send(err)
+    console.log(print);
     res.json(print)
 });
 }
