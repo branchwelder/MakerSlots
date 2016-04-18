@@ -14,6 +14,20 @@ routes.form = function(req, res){
 
 };
 
+routes.editForm = function(req, res){
+  // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
+
+};
+
+routes.editCall = function(req, res){
+  Print.findById(req.id, function (err, print) {
+    if(err)
+      res.send(err)
+    res.json(print)
+});
+}
+
 routes.editPrint = function(req,res){
   //Updates a print through id, though that could be altered to whatever, probably even on-click, which we should see about doing.
   //returns all the prints in the database including the edited one as well as the edited text alone.
@@ -61,7 +75,7 @@ routes.getPrints = function(req,res){
       // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user
       // var start = prints[i].dateAndTime
       // var end = prints[i].endTime
-      var event = {title: prints[i].name + 'printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish};
+      var event = {title: prints[i].name + 'printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish, id: prints[i]._id};
       events.push(event)
     }
 
