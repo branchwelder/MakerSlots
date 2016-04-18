@@ -38,6 +38,8 @@ app.get('/printform', function(req, res){verification.ensureAuthenticated(req, r
 app.get('/prints', routes.getPrints)
 app.get('/add', routes.submit)
 app.get('/forum', routes.forum)
+app.get('/editForm', routes.editForm)
+app.get('/editCall', routes.editCall)
 
 app.get('/login', userroutes.login)
 app.get('/logout', userroutes.logout)
