@@ -22,11 +22,12 @@ function getPosts(res) {
     });
 };
 
+
 routes.dex = function(req, res) {
   res.sendfile('/views/forum.html', { root: path.join(__dirname, '../') });
 }
 
-
+//create a new forum post
 routes.newforumpost = function(req, res){
   Forum.create({
     content: req.body.content,
