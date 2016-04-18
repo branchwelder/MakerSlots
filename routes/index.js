@@ -1,12 +1,27 @@
 Print = require("../models/printModel")
+Forum = require("../models/forumModel")
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
 routes = {}
+
 routes.index = function(req, res){
   // res.sendfile("/views/home.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
   res.sendfile('/views/home.html', { root: path.join(__dirname, '../') });
 
 };
+
+routes.newforumpost = function(req, res){
+  forum = new Forum(req.query)
+  forum.save(function(err){
+    if(err){
+        res.status(500).send("Forum post not saved correctly");}
+      else{
+        res.send()
+        console.log("Forum post submitted")
+      }
+  })
+
+}
 
 routes.form = function(req, res){
   // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})

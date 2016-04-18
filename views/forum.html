@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
   <link rel='stylesheet' href='stylesheets/forum.css' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
   <body>
     <nav class="navbar-dark bg-inverse">
@@ -26,12 +27,25 @@
           </li>
         </ul>
     </nav>
-    <div class="container">
-      <div class="row heading">
+    <div class="heading bg-success">
+      <div>
         <h1>Welcome to the Olin 3d-Printing Forum!</h1>
       </div>
+    </div>
+    <br>
+    <div class="container">
       <div class="row">
         <div class="col-sm-9">
+          <br>
+          <form>
+            <fieldset class="form-group">
+              <textarea class="form-control" name="title" rows="1" placeholder="New Post Title"></textarea>
+              <br>
+              <textarea class="form-control" name="content" rows="3" placeholder="New Post Content"></textarea>
+            </fieldset>
+            <button type="submit" class="btn btn-primary pull-xs-right">Submit</button>
+          </form>
+          <br><br><br>
           <div class="card">
             <div class="card-block">
               <h5 class="card-title">How large of an overhang can the Makerbots handle?<small class="text-muted"> - Hannah Twigg-Smith</small></h5>
@@ -74,5 +88,6 @@
         </div>
       </div>
     </div>
+    <script src="javascript/forum.js"></script>
   </body>
 </html>
