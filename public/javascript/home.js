@@ -33,12 +33,12 @@ $("#printForm").submit(function(event) {
   var mass = $("#mass").val();
   var time = $("#whenprint").val();
   var finish = $("#whendone").val();
-  var part = $("#part").val();
   var hoursDur = $("input[name=hours]").val();
   var minutesDur = $("input[name=minutes]").val();
   var approved = $("input[name=approved]").val();
   var printer = $("input[name=printer]").val();
   var duration = hoursDur*60 + minutesDur;
+  var problems = $("#problems").val();
   window.location = "/";
   //var name = $form.find("[name='name']").val();
 
@@ -54,6 +54,7 @@ $("#printForm").submit(function(event) {
     part: part,
     duration: duration,
     ninjaApproval: approved,
+    problems: problems,
     printer: printer
   })
     .done(onSuccess)
