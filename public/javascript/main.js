@@ -1,4 +1,27 @@
-//this one will populate the calendar
+//populates calendar, autofills form for edits
+var onSuccess = function(data, status) {
+  // window.location = "/editForm";
+  console.log("data printed below");
+  console.log(data);
+  console.log("data printed above");
+  
+    // $('input[value='+data.purpose+']').prop('checked',true); 
+    // $("#name").replaceWith('<input type="text" class="form-control" id="name" value="'+data.name+'">');
+    // $("#email").replaceWith('<input type="text" class="form-control" id="email" value="'+data.email+'">');
+    // $("#part").replaceWith('<input type="text" class="form-control" id="part" value="'+data.part+'">');
+    // $("#whatclass").replaceWith('<input type="text" class="form-control" id="whatclass" value="'+data.classes+'">');
+    // $("#mass").replaceWith('<input type="text" class="form-control" id="mass" value="'+data.mass+'">');
+    
+    // $("#whenprint").replaceWith('<input type="text" class="form-control" id="whenprint" value="'+data.dateAndTime+'">');
+    // // $("#whendone").replaceWith('<input type="text" class="form-control" id="whendone" value="'data.finish'">');
+    // // $("input[name=hours]").replaceWith('<input type="number" class="form-control numberentry" name="hours" min="0" max="50" value="'+data.+'">')
+    // // var minutesDur = $("input[name=minutes]").val();
+    // //these two above are left out because they cant be proccessed correctly.
+
+    // $("input[value="+data.approved+"]").prop('checked',true);
+    // $('input[value='+data.printer+']').prop('checked',true);
+  
+};
 var onSuccess2 = function(data, status) {
   console.log('tried to populate the calendar');
   console.log(data);
@@ -14,10 +37,21 @@ var onError = function(data, status) {
   console.log("error", data);
   console.log("shits broke yo");
 };
+//i need to add an update to calendar entries in the calendar app to include an id, which will be its mongo id, which can be grabbed by clicking
+//on it and used to populate the form, allowing for editing.
 $(document).ready(function() {
     $('#calendar').fullCalendar({
-          eventClick: function() {
-           alert('an event has been clicked!');
+          eventClick: function(calEvent, jsEvent, view) {
+           console.log('trying to get clicked');
+           var clicked = calEvent.id
+           console.log(clicked);
+           console.log("clicked event");
+           $.get("editCall", {
+            id: clicked
+           })
+           .done(onSuccess)
+           .error(onError);
+
           },
           height: 800,
           firstDay: 1,
@@ -36,3 +70,17 @@ $(document).ready(function() {
     .done(onSuccess2)
     .error(onError);
 });
+
+
+// $('#calendar').fullCalendar({
+//     eventClick: function(calEvent, jsEvent, view) {
+
+//         alert('Event: ' + calEvent.title);
+//         alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+//         alert('View: ' + view.name);
+
+//         // change the border color just for fun
+//         $(this).css('border-color', 'red');
+
+//     }
+// });
