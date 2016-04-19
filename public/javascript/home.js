@@ -1,18 +1,12 @@
 console.log("loading home.js");
 var onSuccess = function(data, status) {
-  console.log('tried to edit/delete');
+  console.log('added post');
 
 
 };
-var onSuccess2 = function(data, status) {
-  console.log('tried to populate the calendar');
-  console.log(data);
-  for(var i = 0; i<data.length; i++){
-    $('.fc').fullCalendar( 'renderEvent', data[i], true )  // Add Event to fullCalendar
-  };
   
   // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
-};
+
 
 var onError = function(data, status) {
   console.log("status", status);
@@ -33,12 +27,12 @@ $("#printForm").submit(function(event) {
   var mass = $("#mass").val();
   var time = $("#whenprint").val();
   var finish = $("#whendone").val();
-  var part = $("#part").val();
   var hoursDur = $("input[name=hours]").val();
   var minutesDur = $("input[name=minutes]").val();
   var approved = $("input[name=approved]").val();
   var printer = $("input[name=printer]").val();
   var duration = hoursDur*60 + minutesDur;
+  var problems = $("#problems").val();
   window.location = "/";
   //var name = $form.find("[name='name']").val();
 
@@ -54,6 +48,7 @@ $("#printForm").submit(function(event) {
     part: part,
     duration: duration,
     ninjaApproval: approved,
+    problems: problems,
     printer: printer
   })
     .done(onSuccess)

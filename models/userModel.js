@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt');
+var bcrypt   = require('bcryptjs');
 
 // Create a wiki page schema
 var userSchema = mongoose.Schema({

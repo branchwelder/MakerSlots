@@ -32,11 +32,22 @@ app.use(app.router);
 
 
 // Routes
-app.get('/', routes.index);
+// app.get('/', routes.index);
+app.get('/', function(req, res){verification.ensureAuthenticated(req, res, routes.index)})
 app.get('/printform', function(req, res){verification.ensureAuthenticated(req, res, routes.form)})
 app.get('/prints', routes.getPrints)
 app.get('/add', routes.submit)
+app.get('/editForm', routes.editForm)
+app.get('/editCall', routes.editCall)
+app.get('/schedule', routes.schedule)
 
+//Forum routes
+app.get('/forum', routes.dex)
+app.get('/getPosts', routes.getforumposts)
+
+app.post('/newPost', routes.newforumpost)
+
+//Login/logout routes
 app.get('/login', userroutes.login)
 app.get('/logout', userroutes.logout)
 app.get('/check', function(req,res){
@@ -58,13 +69,10 @@ app.post('/userCreate', passport.authenticate('local-signup',{
 	}
 )
 
-app.post('/submit', routes.submit)
+app.post('/submit', function(req,res){console.log("stahp")})
 
 //Run verification code and import its important functions.
 var verification = require('./verification.js');
-
-
-
 
 
 app.listen(3000, function() {

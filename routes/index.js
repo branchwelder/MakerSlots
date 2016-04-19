@@ -1,18 +1,89 @@
 Print = require("../models/printModel")
+Forum = require("../models/forumModel")
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
 routes = {}
+
+
 routes.index = function(req, res){
   // res.sendfile("/views/home.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
   res.sendfile('/views/home.html', { root: path.join(__dirname, '../') });
 
 };
 
+// FORUM ROUTES
+
+function getPosts(res) {
+    Forum.find(function (err, posts) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(posts);
+    });
+};
+
+
+routes.dex = function(req, res) {
+  res.sendfile('/views/forum.html', { root: path.join(__dirname, '../') });
+}
+
+//create a new forum post
+routes.newforumpost = function(req, res){
+  Forum.create({
+    content: req.body.content,
+    title: req.body.title
+    //user: session.user.name //FIX THIS. how do we access session variables?
+  }, function(err, forum) {
+        if (err) {
+          res.send(err)
+        };
+
+        Forum.find(function(err, posts) {
+          if (err) {
+            res.send(err)
+          };
+        getPosts(res);
+        });
+      }
+  );
+};
+
+routes.getforumposts = function(req, res) {
+  Forum.find(function(err, posts) {
+    if (err) {
+      res.send(err)
+    }
+    res.json(posts);
+  });
+};
+
+// END FORUM ROUTES
+
 routes.form = function(req, res){
   // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
   res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
 
 };
+
+routes.editForm = function(req, res){
+  // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
+  res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
+
+};
+
+routes.schedule = function(req,res){
+  res.sendfile('/views/schedule.html', { root: path.join(__dirname, '../') });
+}
+
+routes.editCall = function(req, res){
+  console.log(req.query.id);
+  Print.findById(req.query.id, function (err, print) {
+    if(err)
+      res.send(err)
+    console.log(print);
+    res.json(print)
+});
+}
 
 routes.editPrint = function(req,res){
   //Updates a print through id, though that could be altered to whatever, probably even on-click, which we should see about doing.
@@ -42,10 +113,10 @@ routes.deletePrint = function(req,res){
           res.send(err)
 
         res.json(prints);
-               
-                
+
+
       });
-    });  
+    });
 }
 
 
@@ -58,10 +129,10 @@ routes.getPrints = function(req,res){
       res.send(err)
     var events = [];
     for (var i = 0;i<prints.length; i++) {
-      // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user 
+      // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user
       // var start = prints[i].dateAndTime
       // var end = prints[i].endTime
-      var event = {title: prints[i].name + 'printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish};
+      var event = {title: prints[i].name + ' printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish, id: prints[i]._id};
       events.push(event)
     }
 
@@ -74,9 +145,10 @@ routes.submit = function(req, res){
   // entry = req.body
   entry = req.query
   validEntry = true
+  // console.log(entry.finish)
 
   //Checking form requirements
-  requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass, 
+  requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass,
                   entry.dateAndTime, entry.finish, entry.duration, entry.printer]
   for(i=0;i<requirements.length;i++){
     if(!requirements[i]){
@@ -91,6 +163,7 @@ routes.submit = function(req, res){
   /////////////////////////
 
   if (validEntry){
+    console.log(entry);
     form = new Print(entry)
     form.save(function(err){
     	if(err){
