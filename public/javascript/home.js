@@ -6,7 +6,7 @@ var onSuccess = function(data, status) {
 };
   
   // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
-};
+
 
 var onError = function(data, status) {
   console.log("status", status);
