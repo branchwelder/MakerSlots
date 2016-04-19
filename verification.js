@@ -18,11 +18,11 @@ passport.use('local-signin', new LocalStrategy(
     User.findOne({ name: username }, function (err, user) {
       if (err) { return done(err); }
       else if (!user) {
-        req.session.error("User does not exist")
+        // req.session.error("User does not exist")
         done(null, false)
       }
       else if (!user.validPassword(password)) { 
-        req.session.error = "Incorrect password"
+        // req.session.error = "Incorrect password"
         // return done(null, false); 
       }
       else {
@@ -42,7 +42,7 @@ passport.use('local-signup', new LocalStrategy(
         console.log(user.length)
         //If someone already has the username
         console.log(user)
-        req.session.error = "That username is already in use"
+        // req.session.error = "That username is already in use"
         console.log("User already exists")
         return done(null, false)
       }
@@ -57,7 +57,7 @@ passport.use('local-signup', new LocalStrategy(
         console.log("trying to save");
         user.save(function(err){
           if (err){
-            req.session.error = "Error saving user to database"
+            // req.session.error = "Error saving user to database"
           }
         })
         return done(null, user)

@@ -1,6 +1,7 @@
 console.log("loading home.js");
 var onSuccess = function(data, status) {
-  console.log('added post');
+  console.log('added event');
+  window.location = "/schedule";
 
 
 };
@@ -11,7 +12,7 @@ var onSuccess = function(data, status) {
 var onError = function(data, status) {
   console.log("status", status);
   console.log("error", data);
-  console.log("shits broke yo");
+  $("#error").replaceWith('<div id="error">*Either a required field has been left empty or you have attempted to submit a 6+ hour print without ninja approval*</div>')
 };
 
 //i want this to, on click, ask the user if they are trying to edit or delete a print
@@ -29,12 +30,11 @@ $("#printForm").submit(function(event) {
   var finish = $("#whendone").val();
   var hoursDur = $("input[name=hours]").val();
   var minutesDur = $("input[name=minutes]").val();
-  var approved = $("input[name=approved]").val();
+  var approved = $("input[name=approved]:checked").val();
+  console.log(approved);
   var printer = $("input[name=printer]:checked").val();
   var duration = parseInt(hoursDur)*60 + parseInt(minutesDur);
   var problems = $("#problems").val();
-  window.location = "/";
-  console.log(duration + "is the amount of time")
 
   //var name = $form.find("[name='name']").val();
 

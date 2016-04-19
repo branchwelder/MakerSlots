@@ -153,11 +153,13 @@ routes.submit = function(req, res){
   for(i=0;i<requirements.length;i++){
     if(!requirements[i]){
       validEntry = false
+      console.log("field problem");
       res.status(500).send("Required form field was empty")
     }
   }
-  if(entry.duration>360 && !entry.ninjaApproval){
+  if(parseInt(entry.duration)>360 && entry.ninjaApproval !== "yes"){
     validEntry = false
+    console.log("ninja approval problem");
     res.status(500).send("Cannot have 6 hr print without ninja approval")
   }
   /////////////////////////
@@ -169,8 +171,9 @@ routes.submit = function(req, res){
     	if(err){
     	  	res.status(500).send("Print Form not saved correctly");}
     	  else{
-    	  	res.send()
+    	  	
     	  	console.log("Print submited.")
+          res.json(entry)
     	  }
     })
   }
