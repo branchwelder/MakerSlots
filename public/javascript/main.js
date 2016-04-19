@@ -2,24 +2,33 @@
 var onSuccess = function(data, status) {
   // window.location = "/editForm";
   console.log("data printed below");
-  console.log(data.name);
+  console.log(data);
   console.log("data printed above");
   $(document).ready(function(){
     console.log("document readied");
-    // $('input[value='+data.purpose+']').prop('checked',true); 
+    $('input[value='+data.purpose+']').prop('checked',true); 
     $("#name").replaceWith('<input type="text" class="form-control" id="name" value="'+data.name+'">');
     $("#email").replaceWith('<input type="text" class="form-control" id="email" value="'+data.email+'">');
     $("#part").replaceWith('<input type="text" class="form-control" id="part" value="'+data.part+'">');
     $("#whatclass").replaceWith('<input type="text" class="form-control" id="whatclass" value="'+data.classes+'">');
-    $("#mass").replaceWith('<input type="text" class="form-control" id="mass" value="'+data.mass+'">');
+    $("#mass").replaceWith('<input type="text" class="form-control" id="mass" value='+data.printMass+'>');
     
     $("#whenprint").replaceWith('<input type="text" class="form-control" id="whenprint" value="'+data.dateAndTime+'">');
-    // $("#whendone").replaceWith('<input type="text" class="form-control" id="whendone" value="'data.finish'">');
-    // $("input[name=hours]").replaceWith('<input type="number" class="form-control numberentry" name="hours" min="0" max="50" value="'+data.+'">')
-    // var minutesDur = $("input[name=minutes]").val();
-    //these two above are left out because they cant be proccessed correctly.
+    $("#whendone").replaceWith('<input type="text" class="form-control" id="whendone" value="'+data.finish+'">');
+    var hours = Math.floor(data.duration/60);
+    var minutes = data.duration%60;
+    $("input[name=hours]").replaceWith('<input type="number" class="form-control numberentry" name="hours" min="0" max="50" value="'+hours+'">')
+    $("input[name=minutes]").replaceWith('<input class="form-control numberentry" type="number" name="minutes" min="0" max="59" value="'+minutes+'">')
+    
+    if(data.ninjaApproval == true) {
+      var currentBoolean = "yes";
+    }
+    else {
+      var currentBoolean = "no";
+    }
 
-    $("input[value="+data.approved+"]").prop('checked',true);
+
+    $("input[value="+currentBoolean+"]").prop('checked',true);
     $('input[value='+data.printer+']').prop('checked',true);
   })
 };

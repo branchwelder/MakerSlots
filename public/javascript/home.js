@@ -30,10 +30,12 @@ $("#printForm").submit(function(event) {
   var hoursDur = $("input[name=hours]").val();
   var minutesDur = $("input[name=minutes]").val();
   var approved = $("input[name=approved]").val();
-  var printer = $("input[name=printer]").val();
-  var duration = hoursDur*60 + minutesDur;
+  var printer = $("input[name=printer]:checked").val();
+  var duration = parseInt(hoursDur)*60 + parseInt(minutesDur);
   var problems = $("#problems").val();
   window.location = "/";
+  console.log(duration + "is the amount of time")
+
   //var name = $form.find("[name='name']").val();
 
   $.get("add", {
@@ -41,7 +43,7 @@ $("#printForm").submit(function(event) {
     name: name,
     email: email,
     part: part,
-    whatClass: whatClass,
+    classes: whatClass,
     printMass: mass,
     dateAndTime: time,
     finish: finish,
