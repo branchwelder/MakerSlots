@@ -31,8 +31,8 @@ routes.dex = function(req, res) {
 routes.newforumpost = function(req, res){
   Forum.create({
     content: req.body.content,
-    title: req.body.title,
-    user: req.sess.username
+    title: req.body.title
+    //user: session.user.name //FIX THIS. how do we access session variables?
   }, function(err, forum) {
         if (err) {
           res.send(err)
