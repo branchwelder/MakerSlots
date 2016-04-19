@@ -132,7 +132,7 @@ routes.getPrints = function(req,res){
       // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user
       // var start = prints[i].dateAndTime
       // var end = prints[i].endTime
-      var event = {title: prints[i].name + 'printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish, id: prints[i]._id};
+      var event = {title: prints[i].name + ' printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish, id: prints[i]._id};
       events.push(event)
     }
 
