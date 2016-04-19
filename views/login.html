@@ -28,19 +28,32 @@
         </ul>
     </nav>
     <br>
-      <form id="login-form">
-      Login:<br>
-      <input type="text" name="userNameLogin" value="email"> <br>
-      <input type="text" name="passwordLogin" value="password"> <br>
-      <input type="submit" value="Login"> <br>
-      </form>
-    <br>
-      <form id="new-user-form">
-      Create new Account:<br>
-      <input type="text" name="userNameCreate" value="email"> <br>
-      <input type="text" name="passwordCreate" value="password"> <br>
-      <input type="submit" value="Create Account"> <br>
-    </form>
-  <script type="text/javascript" src="javascript/logs.js"></script>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <br><br>
+          <form id="login-form">
+            <fieldset class="form-group">
+              <h3 style="text-align:center">Login to MakerSlots</h3>
+              <hr>
+              <input type="text" style="text-align:center" class="form-control" name="userNameLogin" placeholder="Email"> <br>
+              <input type="password" style="text-align:center" class="form-control" name="passwordLogin" placeholder="Password"> <br>
+              <input type="submit" class="btn-block btn btn-primary" value="Login"> <br>
+            </fieldset>
+          </form>
+          <form id="new-user-form">
+            <fieldset class="form-group">
+              <h3 style="text-align:center">Create an Account</h3>
+              <hr>
+              <input type="text" style="text-align:center" class="form-control" name="userNameCreate" placeholder="Email"> <br>
+              <input type="password" style="text-align:center" class="form-control" name="passwordCreate" placeholder="Password"> <br>
+              <input type="submit" class="btn-block btn btn-success" value="Create Account"> <br>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="javascript/logs.js"></script>
   </body>
 </html>
