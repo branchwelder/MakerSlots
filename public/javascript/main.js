@@ -1,6 +1,6 @@
 //populates calendar, autofills form for edits
 var onSuccess = function(data, status) {
-  window.location = "/editForm";
+  // window.location = "/editForm";
   console.log("data printed below");
   console.log(data.name);
   console.log("data printed above");

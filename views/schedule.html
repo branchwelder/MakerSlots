@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
   <link rel='stylesheet' href='../public/stylesheets/forum.css' />
+  <link rel='stylesheet' href='../public/stylesheets/printform.css' />
   <link rel='stylesheet' href='fullCalendarStuff/fc/lib/fullcalendar.min.css' />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -34,7 +35,110 @@
         </ul>
     </nav>
     <div id='calendar'></div>
-    <script src="javascript/main2.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 center">
+          <form id="printForm">
+            <fieldset class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Name">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" placeholder="Email">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="part">Part Name</label>
+              <input type="text" class="form-control" id="part" placeholder="Part Name">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Purpose</label><br>
+              <input type="radio" name="purpose" value="class"> Class/SCOPE<br>
+              <input type="radio" name="purpose" value="research"> Research<br>
+              <input type="radio" name="purpose" value="build"> Project Team or Club<br>
+              <input type="radio" name="purpose" value="passion"> Passionate Pursuit<br>
+              <input type="radio" name="purpose" value="training"> Training<br>
+              <input type="radio" name="purpose" value="personal"> Personal<br>
+              <div class="form-inline">
+                <input type="radio" name="purpose" value="other"> Other: <input type="text" class="form-control numberentry" name="purpose-other">
+              </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="whatclass">What class is this for?</label>
+              <input type="text" class="form-control" id="whatclass">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="mass">Print Mass</label>
+              <input type="text" class="form-control" id="mass" placeholder="Mass">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="whenprint">Date and Time ex: Tue, 5 Apr 2016 10:00:00 EST</label>
+              <input type="text" class="form-control" id="whenprint" placeholder="Date and Time">
+              <label for="whendone">Finish Date and Time ex: Tue, 5 Apr 2016 14:00:00 EST</label>
+              <input type="text" class="form-control" id="whendone" placeholder="Date and Time">
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Print Duration (IF OVER 6 HOURS PLEASE SEE A NINJA BEFORE PRINTING)</label> <br>
+              <div class="form-inline">
+                <input type="number" class="form-control numberentry" name="hours" min="0" max="50"> hours <input class="form-control numberentry" type="number" name="minutes" min="0" max="59"> minutes<br>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>If your print is longer than 6 hours, has a NINJA approved it?</label><br>
+              <input type="radio" name="approved" value="yes"> Yes<br>
+              <input type="radio" name="approved" value="no"> No<br>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label>Printer</label><br>
+              <input type="radio" name="printer" value="merida"> Merida<br>
+              <input type="radio" name="printer" value="elsa"> Elsa<br>
+              <input type="radio" name="printer" value="ariel"> Ariel<br>
+              <input type="radio" name="printer" value="leia"> Leia<br>
+              <input type="radio" name="printer" value="mushu"> Mushu<br>
+              <input type="radio" name="printer" value="wall-e"> Wall-E<br>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <label for="problems">Problems?</label>
+              <input type="text" class="form-control" id="problems" placeholder="Problems?">
+            </fieldset>
+            <input type="submit" value="Submit" class="btn btn-success btn-block">
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <script src="javascript/main.js"></script>
 
   </body>
 </html>
