@@ -75,9 +75,6 @@ app.post('/submit', function(req,res){console.log("stahp")})
 var verification = require('./verification.js');
 
 
-
-
-
 app.listen(3000, function() {
   console.log('Node app is running on port', 3000);
 });

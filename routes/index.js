@@ -31,7 +31,8 @@ routes.dex = function(req, res) {
 routes.newforumpost = function(req, res){
   Forum.create({
     content: req.body.content,
-    title: req.body.title
+    title: req.body.title,
+    user: req.sess.username
   }, function(err, forum) {
         if (err) {
           res.send(err)
