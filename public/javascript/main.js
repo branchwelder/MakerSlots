@@ -44,10 +44,18 @@ var onSuccess2 = function(data, status) {
 
 var onSuccess3 = function(data, status) {
   console.log("success3 ran");
+  window.location = "/schedule";
+
   
   // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
 };
 
+var onSuccess4 = function(data, status) {
+  console.log("success4 ran");
+  window.location = "/schedule";
+
+  // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
+};
 
 var onError = function(data, status) {
   console.log("status", status);
@@ -132,8 +140,16 @@ $("#printFormEdit").submit(function(event) {
 }
 });
 
-
-
+function delPrint() {
+  var r = confirm("Are you sure you want to delete this print?");
+  if (r == true) {
+    if (clicked != undefined) {
+      $.get("deletePrint", {id: clicked})
+      .done(onSuccess4)
+      .error(onError);
+    }   
+  } 
+}
 
 // $('#calendar').fullCalendar({
 //     eventClick: function(calEvent, jsEvent, view) {

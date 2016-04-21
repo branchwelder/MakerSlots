@@ -114,18 +114,11 @@ routes.editPrint = function(req,res){
 routes.deletePrint = function(req,res){
   //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
   Print.remove({
-     _id : req.params.PrintId
+     _id : req.query.id
   }, function(err, removed) {
       if (err)
          res.send(err);
-      Print.find(function(err, prints) {
-        if (err)
-          res.send(err)
-
-        res.json(prints);
-
-
-      });
+       res.json();
     });
 }
 
