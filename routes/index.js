@@ -89,17 +89,27 @@ routes.editPrint = function(req,res){
   //Updates a print through id, though that could be altered to whatever, probably even on-click, which we should see about doing.
   //returns all the prints in the database including the edited one as well as the edited text alone.
   Print.update({
-      _id : req.params.PrintId},{$set:{text: req.body.text}}, function(err, print) {
+      _id : req.query.id},{$set:{name: req.query.name, 
+        email: req.query.email, 
+        part: req.query.part, 
+        purpose: req.query.purpose,
+        classes: req.query.classes,
+        printMass: req.query.printMass,
+        dateAndTime: req.query.dateAndTime,
+        finish: req.query.finish,
+        duration: req.query.duration,
+        ninjaApproval: req.query.ninjaApproval,
+        printer: req.query.printer,
+        problems: req.query.problems}}, function(err, print) {
         if (err)
             res.send(err);
+        res.json();
 
-        Print.find({}, function(err, prints) {
-            if (err)
-                res.send(err)
-            res.json({Prints: prints, editedPrint: req.body});
-        });
     });
 }
+
+
+
 
 routes.deletePrint = function(req,res){
   //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
