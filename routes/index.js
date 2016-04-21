@@ -171,7 +171,7 @@ routes.submit = function(req, res){
     	if(err){
     	  	res.status(500).send("Print Form not saved correctly");}
     	  else{
-    	  	
+
     	  	console.log("Print submited.")
           res.json(entry)
     	  }
