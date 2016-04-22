@@ -1,6 +1,7 @@
 Print = require("../models/printModel")
 Forum = require("../models/forumModel")
 Announce = require("../models/announcementModel")
+Printer = require("../models/printerModel")
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
 routes = {}
@@ -10,11 +11,87 @@ routes.index = function(req, res){
   res.sendfile('/views/home.html', { root: path.join(__dirname, '../') }); 
 
 };
+// PRINTER ROUTES
+routes.getPrinters = function(req,res) {
+    Printer.find(function(err, printers) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(printers);
+    });
+};
+
+
+routes.newPrinter = function(req, res){
+  Printer.create({
+    name: req.body.name,
+    status: req.body.status
+    //user: session.user.name //FIX THIS. how do we access session variables?
+  }, function(err, printers) {
+        if (err) {
+          res.send(err)
+        };
+
+        Printer.find(function(err, printer) {
+          if (err) {
+            res.send(err)
+          };
+        res.json(printer);
+        });
+      }
+  );
+};
+
+routes.editPrinter = function(req,res){
+
+  Printer.update({
+      _id : req.body.id},{$set:{
+        name: req.body.name,
+        status: req.body.status
+      }}, function(err, edited) {
+        if (err)
+            res.send(err);
+        Announce.find(function(err, Printers) {
+                if (err)
+                    res.send(err)
+
+                res.json(Printers);
+                
+                
+            });
+
+    });
+}
+
+
+
+
+routes.deletePrinter = function(req,res){
+  //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
+  Printer.remove({
+     _id : req.body.id
+  }, function(err, removed) {
+      if (err)
+         res.send(err);
+       Printer.find(function(err, Printers) {
+                if (err)
+                    res.send(err)
+
+                res.json(Printers);
+                
+                
+            });
+
+
+    });
+}
+
+
 
 // ANNOUNCEMENT ROUTES
 
 routes.getAnnouncements = function(req,res) {
-    Announce.find(function (err, posts) {
+    Announce.find(function(err, posts) {
         if (err) {
             res.send(err);
         }
@@ -34,16 +111,16 @@ routes.newAnnouncement = function(req, res){
     user: req.body.user,
     text: req.body.text
     //user: session.user.name //FIX THIS. how do we access session variables?
-  }, function(err, forum) {
+  }, function(err, announcement) {
         if (err) {
           res.send(err)
         };
 
-        Announce.find(function(err, posts) {
+        Announce.find(function(err, announcements) {
           if (err) {
             res.send(err)
           };
-        getPosts(res);
+        res.json(announcements);
         });
       }
   );
