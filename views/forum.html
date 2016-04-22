@@ -8,7 +8,7 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-    <link rel='stylesheet' href='stylesheets/forum.css' />
+    <link rel='stylesheet' href='stylesheets/forum.css'/>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
   </head>
@@ -76,18 +76,29 @@
           <div ng-repeat="post in posts">
             <div class="card">
               <div class="card-block">
-                <h5 class="card-title"> {{post.title}} <small class="text-muted"> - {{post.user}} Hannah Twigg-Smith</small></h5>
+                <h4 class="card-title"> {{post.title}} <small class="text-muted"> - {{post.user}} Hannah Twigg-Smith</small></h5>
                 <span class="label label-primary">Default</span>
                 <br><br>
-                <p class="card-text"> {{post.content}} <a href="#" class="card-link">View</a></p>
+                <p class="card-text"> {{post.content}}</p>
               </div>
-              <p class="text-xs-center" type="href" data-toggle="collapse" data-target="#{{post._id}}" aria-expanded="false" aria-controls={{post._id}}>Show Comments</p>
+              <div class="card-block text-xs-center">
+                <button class="btn btn-info pull-xs-right showhide" type="button" data-toggle="collapse" data-target="#{{post._id}}" aria-expanded="false" aria-controls={{post._id}}>Show/Hide Comments</button><br><br>
+              </div>
               <div class="collapse" id={{post._id}}>
+                <hr>
                 <div class="card-block">
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">Have you asked the Ninjas? <small class="text-muted"> - Hannah Twigg-Smith</small></li>
                     <li class="list-group-item">Definitely less than an inch, I think. <small class="text-muted"> - Tatiana Anthony</small></li>
                     <li class="list-group-item">Vestibulum at eros <small class="text-muted"> - Matt Ruehle</small></li>
+                    <li class="list-group-item"><br>
+                      <form>
+                        <fieldset class="form-group">
+                          <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Contribute to the conversation"></textarea>
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary pull-xs-right buttonpad">Submit</button><button class="btn btn-danger pull-xs-right">Delete Post</button><br>
+                      </form>
+                    </li>
                   </ul>
                 </div>
               </div>
