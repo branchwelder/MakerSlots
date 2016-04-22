@@ -1,15 +1,102 @@
 Print = require("../models/printModel")
 Forum = require("../models/forumModel")
+Announce = require("../models/announcementModel")
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
 routes = {}
 
 
 routes.index = function(req, res){
-  // res.sendfile("/views/home.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
-  res.sendfile('/views/home.html', { root: path.join(__dirname, '../') });
+  res.sendfile('/views/home.html', { root: path.join(__dirname, '../') }); 
 
 };
+
+// ANNOUNCEMENT ROUTES
+
+routes.getAnnouncements = function(req,res) {
+    Announce.find(function (err, posts) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(posts);
+    });
+};
+
+routes.announcements = function(req, res){
+  res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') }); //REPLACE THIS WITH A REAL ANNOUNCEMENTS PAGE
+
+};
+
+
+routes.newAnnouncement = function(req, res){
+  Announce.create({
+    time: req.body.time,
+    user: req.body.user,
+    text: req.body.text
+    //user: session.user.name //FIX THIS. how do we access session variables?
+  }, function(err, forum) {
+        if (err) {
+          res.send(err)
+        };
+
+        Announce.find(function(err, posts) {
+          if (err) {
+            res.send(err)
+          };
+        getPosts(res);
+        });
+      }
+  );
+};
+
+routes.editAnnouncement = function(req,res){
+
+  Announce.update({
+      _id : req.body.id},{$set:{
+        time: req.body.time,
+        user: req.body.user,
+        text: req.body.text
+      }}, function(err, edited) {
+        if (err)
+            res.send(err);
+        Announce.find(function(err, Announcements) {
+                if (err)
+                    res.send(err)
+
+                res.json(Announcements);
+                
+                
+            });
+
+    });
+}
+
+
+
+
+routes.deleteAnnouncement = function(req,res){
+  //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
+  Announce.remove({
+     _id : req.body.id
+  }, function(err, removed) {
+      if (err)
+         res.send(err);
+       Announce.find(function(err, Announcements) {
+                if (err)
+                    res.send(err)
+
+                res.json(Announcements);
+                
+                
+            });
+
+
+    });
+}
+
+
+
+
 
 // FORUM ROUTES
 
@@ -65,6 +152,8 @@ routes.form = function(req, res){
 
 };
 
+
+//PRINT/CALENDAR ROUTES
 routes.editForm = function(req, res){
   // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
   res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
