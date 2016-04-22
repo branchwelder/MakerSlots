@@ -3,6 +3,7 @@ var forummodule = angular.module('forummodule', []);
 
 function mainController($scope, $http) {
     $scope.formData = {};
+    $scope.commentFormData = {};
 
     // show the todos
     $http.get('/getPosts')
@@ -32,6 +33,19 @@ function mainController($scope, $http) {
         $http.delete('/delete/' + id)
             .success(function(data) {
                 $scope.todos = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
+
+    $scope.addComment = function() {
+        $http.post('/newComment', $scope.commentFormData)
+            .success(function(data) {
+                $scope.commentFormData = {}; // clear the form so our user is ready to enter another
+                $scope.posts = data;
                 console.log(data);
             })
             .error(function(data) {

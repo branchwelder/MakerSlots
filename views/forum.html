@@ -94,9 +94,9 @@
                     <li class="list-group-item"><br>
                       <form>
                         <fieldset class="form-group">
-                          <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Contribute to the conversation"></textarea>
+                          <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Contribute to the conversation" ng-model="commentFormData.comment" commentFormData.id={{post._id}}></textarea>
                         </fieldset>
-                        <button type="submit" class="btn btn-primary pull-xs-right buttonpad">Submit</button><button class="btn btn-danger pull-xs-right">Delete Post</button><br>
+                        <button type="submit" class="btn btn-primary pull-xs-right buttonpad" ng-click="addComment()">Submit</button><button class="btn btn-danger pull-xs-right">Delete Post</button><br>
                       </form>
                     </li>
                   </ul>
