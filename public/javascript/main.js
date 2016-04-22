@@ -42,6 +42,21 @@ var onSuccess2 = function(data, status) {
   // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
 };
 
+var onSuccess3 = function(data, status) {
+  console.log("success3 ran");
+  window.location = "/schedule";
+
+  
+  // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
+};
+
+var onSuccess4 = function(data, status) {
+  console.log("success4 ran");
+  window.location = "/schedule";
+
+  // $("#result").append("<div id='result'>"+data.name+": "+data.price+"$</div>");
+};
+
 var onError = function(data, status) {
   console.log("status", status);
   console.log("error", data);
@@ -50,10 +65,11 @@ var onError = function(data, status) {
 //i need to add an update to calendar entries in the calendar app to include an id, which will be its mongo id, which can be grabbed by clicking
 //on it and used to populate the form, allowing for editing.
 $(document).ready(function() {
+  clicked = undefined
     $('#calendar').fullCalendar({
           eventClick: function(calEvent, jsEvent, view) {
            console.log('trying to get clicked');
-           var clicked = calEvent.id
+           clicked = calEvent.id
            console.log(clicked);
            console.log("clicked event");
            $.get("editCall", {
@@ -81,6 +97,59 @@ $(document).ready(function() {
     .error(onError);
 });
 
+$("#printFormEdit").submit(function(event) {
+  if(clicked != undefined) {
+    event.preventDefault();
+    // var purposes = $("input[name|=purpose]")
+    var purposes = $('input[name=purpose]:checked').val();
+    var name = $("#name").val();
+    var email = $("#email").val();
+    var part = $("#part").val();
+    var whatClass = $("#whatclass").val();
+    var mass = $("#mass").val();
+    var time = $("#whenprint").val();
+    var finish = $("#whendone").val();
+    var hoursDur = $("input[name=hours]").val();
+    var minutesDur = $("input[name=minutes]").val();
+    var approved = $("input[name=approved]:checked").val();
+    console.log(approved);
+    var printer = $("input[name=printer]:checked").val();
+    var duration = parseInt(hoursDur)*60 + parseInt(minutesDur);
+    var problems = $("#problems").val();
+
+    //var name = $form.find("[name='name']").val();
+
+    $.get("editPrint", {
+      id: clicked,
+      purpose: purposes,
+      name: name,
+      email: email,
+      part: part,
+      classes: whatClass,
+      printMass: mass,
+      dateAndTime: time,
+      finish: finish,
+      part: part,
+      duration: duration,
+      ninjaApproval: approved,
+      problems: problems,
+      printer: printer
+    })
+      .done(onSuccess3)
+      .error(onError);
+}
+});
+
+function delPrint() {
+  var r = confirm("Are you sure you want to delete this print?");
+  if (r == true) {
+    if (clicked != undefined) {
+      $.get("deletePrint", {id: clicked})
+      .done(onSuccess4)
+      .error(onError);
+    }   
+  } 
+}
 
 // $('#calendar').fullCalendar({
 //     eventClick: function(calEvent, jsEvent, view) {
