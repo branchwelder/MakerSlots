@@ -4,11 +4,11 @@ Announce = require("../models/announcementModel")
 Printer = require("../models/printerModel")
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
-routes = {}
+routes = {} //heloo
 
 
 routes.index = function(req, res){
-  res.sendfile('/views/home.html', { root: path.join(__dirname, '../') }); 
+  res.sendfile('/views/home.html', { root: path.join(__dirname, '../') });
 
 };
 // PRINTER ROUTES
@@ -56,8 +56,8 @@ routes.editPrinter = function(req,res){
                     res.send(err)
 
                 res.json(Printers);
-                
-                
+
+
             });
 
     });
@@ -78,8 +78,8 @@ routes.deletePrinter = function(req,res){
                     res.send(err)
 
                 res.json(Printers);
-                
-                
+
+
             });
 
 
@@ -141,8 +141,8 @@ routes.editAnnouncement = function(req,res){
                     res.send(err)
 
                 res.json(Announcements);
-                
-                
+
+
             });
 
     });
@@ -163,8 +163,8 @@ routes.deleteAnnouncement = function(req,res){
                     res.send(err)
 
                 res.json(Announcements);
-                
-                
+
+
             });
 
 
@@ -255,9 +255,9 @@ routes.editPrint = function(req,res){
   //Updates a print through id, though that could be altered to whatever, probably even on-click, which we should see about doing.
   //returns all the prints in the database including the edited one as well as the edited text alone.
   Print.update({
-      _id : req.query.id},{$set:{name: req.query.name, 
-        email: req.query.email, 
-        part: req.query.part, 
+      _id : req.query.id},{$set:{name: req.query.name,
+        email: req.query.email,
+        part: req.query.part,
         purpose: req.query.purpose,
         classes: req.query.classes,
         printMass: req.query.printMass,
