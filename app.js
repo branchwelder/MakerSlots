@@ -23,7 +23,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
-app.use(session({secret: 'weremakingawebsiteforseveral3dprinters', saveUninitialized: false, resave: false}));
+app.use(session({secret: 'weremakingawebsiteforseveral3dprinters', cookie:{}, saveUninitialized: false, resave: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
