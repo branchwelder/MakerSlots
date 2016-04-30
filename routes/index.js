@@ -2,6 +2,7 @@ Print = require("../models/printModel")
 Forum = require("../models/forumModel")
 Announce = require("../models/announcementModel")
 Printer = require("../models/printerModel")
+Users = require("../models/userModel")
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
 routes = {} //heloo
@@ -23,30 +24,38 @@ routes.getPrinters = function(req,res) {
 
 
 routes.newPrinter = function(req, res){
-  Printer.create({
-    name: req.body.name,
-    status: req.body.status
-    //user: session.user.name //FIX THIS. how do we access session variables?
-  }, function(err, printers) {
-        if (err) {
-          res.send(err)
-        };
+  Users.findOne({name: req.user}, function (err, person) {
+    if(err){
+      res.send(err)
+    };
+    if(person.isNinja == true){
 
-        Printer.find(function(err, printer) {
+
+    Printer.create({
+      name: req.body.name,
+      status: req.body.status
+    }, function(err, printers) {
           if (err) {
             res.send(err)
           };
-        res.json(printer);
-        });
-      }
-  );
+
+          Printer.find(function(err, printer) {
+            if (err) {
+              res.send(err)
+            };
+          res.json(printer);
+          });
+        }
+    );
+  }
+})
 };
 
 routes.editPrinter = function(req,res){
 
   Printer.update({
       _id : req.body.id},{$set:{
-        name: req.body.name,
+        // name: req.body.name,
         status: req.body.status
       }}, function(err, edited) {
         if (err)
@@ -68,6 +77,12 @@ routes.editPrinter = function(req,res){
 
 routes.deletePrinter = function(req,res){
   //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
+  Users.findOne({name: req.user}, function (err, person) {
+    if(err){
+      res.send(err)
+    };
+    if(person.isNinja == true){
+
   Printer.remove({
      _id : req.body.id
   }, function(err, removed) {
@@ -84,6 +99,8 @@ routes.deletePrinter = function(req,res){
 
 
     });
+}
+})
 }
 
 
@@ -106,6 +123,11 @@ routes.announcements = function(req, res){
 
 
 routes.newAnnouncement = function(req, res){
+  Users.findOne({name: req.user}, function (err, person) {
+    if(err){
+      res.send(err)
+    };
+    if(person.isNinja == true){
   Announce.create({
     time: req.body.time,
     user: req.body.user,
@@ -123,11 +145,17 @@ routes.newAnnouncement = function(req, res){
         res.json(announcements);
         });
       }
-  );
+    );
+  }
+  })
 };
 
 routes.editAnnouncement = function(req,res){
-
+  Users.findOne({name: req.user}, function (err, person) {
+    if(err){
+      res.send(err)
+    };
+    if(person.isNinja == true){
   Announce.update({
       _id : req.body.id},{$set:{
         time: req.body.time,
@@ -145,7 +173,9 @@ routes.editAnnouncement = function(req,res){
 
             });
 
-    });
+      });
+    }
+  })
 }
 
 
@@ -153,6 +183,12 @@ routes.editAnnouncement = function(req,res){
 
 routes.deleteAnnouncement = function(req,res){
   //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
+  
+  Users.findOne({name: req.user}, function (err, person) {
+    if(err){
+      res.send(err)
+    };
+    if(person.isNinja == true){
   Announce.remove({
      _id : req.body.id
   }, function(err, removed) {
@@ -168,7 +204,9 @@ routes.deleteAnnouncement = function(req,res){
             });
 
 
-    });
+      });
+    }
+  })
 }
 
 
@@ -195,8 +233,8 @@ routes.dex = function(req, res) {
 routes.newforumpost = function(req, res){
   Forum.create({
     content: req.body.content,
-    title: req.body.title
-    //user: session.user.name //FIX THIS. how do we access session variables?
+    title: req.body.title,
+    user: req.user 
   }, function(err, forum) {
         if (err) {
           res.send(err)
