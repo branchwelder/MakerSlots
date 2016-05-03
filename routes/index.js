@@ -13,6 +13,7 @@ routes.index = function(req, res){
 
 };
 // PRINTER ROUTES
+//finds all printers in printer database
 routes.getPrinters = function(req,res) {
     Printer.find(function(err, printers) {
         if (err) {
@@ -22,7 +23,7 @@ routes.getPrinters = function(req,res) {
     });
 };
 
-
+//creates new printer and returns all printers
 routes.newPrinter = function(req, res){
   Users.findOne({name: req.user}, function (err, person) {
     if(err){
@@ -51,8 +52,8 @@ routes.newPrinter = function(req, res){
 })
 };
 
+//edit printer 
 routes.editPrinter = function(req,res){
-
   Printer.update({
       _id : req.body.id},{$set:{
         // name: req.body.name,
@@ -74,9 +75,8 @@ routes.editPrinter = function(req,res){
 
 
 
-
+//deletes printer if user has ninja status == true
 routes.deletePrinter = function(req,res){
-  //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
   Users.findOne({name: req.user}, function (err, person) {
     if(err){
       res.send(err)
@@ -106,7 +106,7 @@ routes.deletePrinter = function(req,res){
 
 
 // ANNOUNCEMENT ROUTES
-
+//gets all announcements in database
 routes.getAnnouncements = function(req,res) {
     Announce.find(function(err, posts) {
         if (err) {
@@ -121,7 +121,7 @@ routes.announcements = function(req, res){
 
 };
 
-
+//creates a new announcement
 routes.newAnnouncement = function(req, res){
   Users.findOne({name: req.user}, function (err, person) {
     if(err){
@@ -132,7 +132,6 @@ routes.newAnnouncement = function(req, res){
     time: req.body.time,
     user: req.body.user,
     text: req.body.text
-    //user: session.user.name //FIX THIS. how do we access session variables?
   }, function(err, announcement) {
         if (err) {
           res.send(err)
@@ -150,6 +149,7 @@ routes.newAnnouncement = function(req, res){
   })
 };
 
+//edits existing announcement
 routes.editAnnouncement = function(req,res){
   Users.findOne({name: req.user}, function (err, person) {
     if(err){
@@ -178,9 +178,7 @@ routes.editAnnouncement = function(req,res){
   })
 }
 
-
-
-
+//deletes an announcement
 routes.deleteAnnouncement = function(req,res){
   //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
   
@@ -214,7 +212,7 @@ routes.deleteAnnouncement = function(req,res){
 
 
 // FORUM ROUTES
-
+//gets all posts on the forum from the database
 function getPosts(res) {
     Forum.find(function (err, posts) {
         if (err) {
@@ -250,6 +248,7 @@ routes.newforumpost = function(req, res){
   );
 };
 
+//gets all forum posts from database
 routes.getforumposts = function(req, res) {
   Forum.find(function(err, posts) {
     if (err) {
@@ -268,17 +267,19 @@ routes.form = function(req, res){
 };
 
 
-//PRINT/CALENDAR ROUTES
+//PRINT CALENDAR ROUTES
 routes.editForm = function(req, res){
   // res.sendfile("/views/printform.html", {root:'/home/sean/Documents/Classes_Olin/2016/MakerSlots/'})
   res.sendfile('/views/printform.html', { root: path.join(__dirname, '../') });
 
 };
 
+
 routes.schedule = function(req,res){
   res.sendfile('/views/schedule.html', { root: path.join(__dirname, '../') });
 }
 
+//intermediate in allowing prints to be manipulated when clicked
 routes.editCall = function(req, res){
   console.log(req.query.id);
   Print.findById(req.query.id, function (err, print) {
@@ -289,6 +290,7 @@ routes.editCall = function(req, res){
 });
 }
 
+//edits print
 routes.editPrint = function(req,res){
   //Updates a print through id, though that could be altered to whatever, probably even on-click, which we should see about doing.
   //returns all the prints in the database including the edited one as well as the edited text alone.
@@ -314,7 +316,7 @@ routes.editPrint = function(req,res){
 
 
 
-
+//deletes a selected print
 routes.deletePrint = function(req,res){
   //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
   Print.remove({
@@ -326,9 +328,7 @@ routes.deletePrint = function(req,res){
     });
 }
 
-
-//this needs to be edited so that theres an end time, and maybe take out duration as a result. we can probably calculate duration based on start
-//and end time.
+//gathers all prints from database
 routes.getPrints = function(req,res){
   //grabs all prints from database and returns them
   Print.find({}, function(err,prints) {
@@ -347,12 +347,11 @@ routes.getPrints = function(req,res){
   });
 }
 
+//submits a print
 routes.submit = function(req, res){
   console.log("Submiting Print")
-  // entry = req.body
   entry = req.query
   validEntry = true
-  // console.log(entry.finish)
 
   //Checking form requirements
   requirements = [entry.name, entry.email, entry.part, entry.purpose, entry.printMass,
@@ -369,7 +368,6 @@ routes.submit = function(req, res){
     console.log("ninja approval problem");
     res.status(500).send("Cannot have 6 hr print without ninja approval")
   }
-  /////////////////////////
 
   if (validEntry){
     console.log(entry);
@@ -378,7 +376,6 @@ routes.submit = function(req, res){
     	if(err){
     	  	res.status(500).send("Print Form not saved correctly");}
     	  else{
-
     	  	console.log("Print submited.")
           res.json(entry)
     	  }
