@@ -3,6 +3,8 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local')
 var bcrypt = require('bcryptjs')
 
+//Both of these functions are required to make passport work. 
+//We didn't need them to actually do anything, so they don't.
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -10,28 +12,33 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+//This function uses a person's username and password to sign them in.
+//No other information is required.
 passport.use('local-signin', new LocalStrategy(
   {username:'name', password:'password', passReqToCallback:true},
   function(req, username, password, done) {
-    console.log("Signing someone in.")
-    console.log(done)
     User.findOne({ name: username }, function (err, user) {
+      //Checks for an existing user
+      //"done" function takes (err, user or denial)
       if (err) { return done(err); }
       else if (!user) {
-        // req.session.error("User does not exist")
+      	//No user exists
         done(null, false)
       }
-      else if (!user.validPassword(password)) { 
-        // req.session.error = "Incorrect password"
-        // return done(null, false); 
+      else if (!user.validPassword(password)) {
+      	//Password doesn't match 
+        return done(null, false); 
       }
       else {
+      	//User is valid
         return done(null, user);
       }
     });
   }
 ));
 
+//This is called when someone tries to create a new user
+//It gets most of its information from the request made to it
 passport.use('local-signup', new LocalStrategy(
   {username:'name', password:'password', passReqToCallback:true},
   function(req, username, password, done) {
@@ -39,22 +46,16 @@ passport.use('local-signup', new LocalStrategy(
     User.find({ name: username }, function (err, user) {
       if (err) { return done(err); console.log(err)}
       else if(user.length != 0){
-        console.log(user.length)
         //If someone already has the username
-        console.log(user)
-        // req.session.error = "That username is already in use"
-        console.log("User already exists")
         return done(null, false)
       }
       else{
-        console.log(user);
         userinfo = req.body
         user = new User()
         user.name = userinfo.username;
         user.email = userinfo.email;
-        user.password = user.generateHash(userinfo.password);
-
-        console.log("trying to save");
+        user.isNinja = false;
+    
         user.save(function(err){
           if (err){
             // req.session.error = "Error saving user to database"
@@ -66,15 +67,19 @@ passport.use('local-signup', new LocalStrategy(
     })
   }
 ));
+
 // test authentication
+//"next" is the actual function for the route you protect with authentication
 var ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) { 
     return next(req, res); }
   else{
-    // res.send("please log in");
     res.redirect('/login');
   }
   res.status(401);
 }
+
+//This entire file is run when it is first called, so this is
+//the only export that es actually needed.
 functions = {"ensureAuthenticated": ensureAuthenticated}
 module.exports = functions
