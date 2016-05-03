@@ -4,18 +4,14 @@ var onError = function(data, status) {
 };
 
 var onSuccess = function(data, status) {
-	console.log("success");	
 	window.location = "/";
-	// $("#result").append("<div>"  " </div>");
-	// console.log("data:" + data)
 }
 
 var onSuccess2 = function(data, status) {
-	console.log("success");	
 	window.location = "/";
 }
 
-
+//handles existing user login
 $("#login-form").submit(function(event){
 	event.preventDefault();
 	var email = $("input[name=userNameLogin]").val();
@@ -28,6 +24,7 @@ $("#login-form").submit(function(event){
 	  .error(onError);
 });
 
+//handles new user account creation and login
 $("#new-user-form").submit(function(event){
 	event.preventDefault();
 	console.log('i tried to make a new user')
