@@ -5,7 +5,7 @@ Printer = require("../models/printerModel")
 Users = require("../models/userModel")
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
-routes = {} //heloo
+routes = {} 
 
 
 routes.index = function(req, res){
