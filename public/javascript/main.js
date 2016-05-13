@@ -1,7 +1,7 @@
 //populates calendar, autofills form for edits
 var onSuccess = function(data, status) {
   $(document).ready(function(){
-    $('input[value='+data.purpose+']').prop('checked',true); 
+    $('input[value='+data.purpose+']').prop('checked',true);
     $("#name").replaceWith('<input type="text" class="form-control" id="name" value="'+data.name+'">');
     $("#email").replaceWith('<input type="text" class="form-control" id="email" value="'+data.email+'">');
     $("#part").replaceWith('<input type="text" class="form-control" id="part" value="'+data.part+'">');
@@ -9,13 +9,13 @@ var onSuccess = function(data, status) {
     $("#mass").replaceWith('<input type="text" class="form-control" id="mass" value='+data.printMass+'>');
     $("#whenprint").replaceWith('<input type="text" class="form-control" id="whenprint" value="'+data.dateAndTime+'">');
     $("#whendone").replaceWith('<input type="text" class="form-control" id="whendone" value="'+data.finish+'">');
-    
+
     var hours = Math.floor(data.duration/60);
     var minutes = data.duration%60;
-    
+
     $("input[name=hours]").replaceWith('<input type="number" class="form-control numberentry" name="hours" min="0" max="50" value="'+hours+'">')
     $("input[name=minutes]").replaceWith('<input class="form-control numberentry" type="number" name="minutes" min="0" max="59" value="'+minutes+'">')
-    
+
     //change the data into something the program can use to find the html elements
     if(data.ninjaApproval == true) {
       var currentBoolean = "yes";
@@ -69,9 +69,9 @@ $(document).ready(function() {
           height: 800,
           firstDay: 1,
           defaultView: 'agendaWeek'
-        
+
     })
-    
+
     var calendar = $('#calendar').fullCalendar('getCalendar');
     calendar.on('dayClick', function(date, jsEvent, view) {
       alert('clicked on ' + date.format());
@@ -98,7 +98,7 @@ $("#printFormEdit").submit(function(event) {
     var hoursDur = $("input[name=hours]").val();
     var minutesDur = $("input[name=minutes]").val();
     var approved = $("input[name=approved]:checked").val();
-    console.log(approved);
+    // remove debugging mechanisms!
     var printer = $("input[name=printer]:checked").val();
     var duration = parseInt(hoursDur)*60 + parseInt(minutesDur);
     var problems = $("#problems").val();
@@ -132,6 +132,6 @@ function delPrint() {
       $.get("deletePrint", {id: clicked})
       .done(onSuccess4)
       .error(onError);
-    }   
-  } 
+    }
+  }
 }

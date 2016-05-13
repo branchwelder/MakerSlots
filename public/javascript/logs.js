@@ -7,7 +7,7 @@ var onSuccess = function(data, status) {
 	window.location = "/";
 }
 
-var onSuccess2 = function(data, status) {
+var onSuccess2 = function(data, status) { // yep, your onSuccess functions will conflict -- this is a workaround, but could you pick a more semantic name?
 	window.location = "/";
 }
 

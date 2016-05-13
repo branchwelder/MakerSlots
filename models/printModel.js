@@ -23,11 +23,11 @@ var printSchema = mongoose.Schema({
     printMass: Number,
     dateAndTime: String,
     finish: String, //we need to add functionality to this
-    duration: Number, //In minutes //and probably remove this
+    duration: Number, //In minutes //and probably remove this <- I think you should -- either this or finish time
     ninjaApproval: Boolean,
     printer: String,
     problems: String
 
 });
 
-module.exports  = mongoose.model('print', printSchema);
+module.exports = mongoose.model('print', printSchema);

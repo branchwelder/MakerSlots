@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-// Create a wiki page schema
+// Create a wiki page schema <-- make sure you update comments to match new context if you're reusing code :)
 var forumSchema = mongoose.Schema({
     user: String,
     content: String,

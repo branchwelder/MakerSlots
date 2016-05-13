@@ -11,7 +11,7 @@ var express = require('express'),
     passport = require('passport');
     cookieParser = require('cookie-parser');
 
-mongoose.connect('mongodb://localhost/MakerSlot');
+mongoose.connect('mongodb://localhost/MakerSlot'); // every user gets their own local database?
 
 var app = module.exports = express.createServer();
 
@@ -23,7 +23,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
-app.use(session({secret: 'weremakingawebsiteforseveral3dprinters', cookie:{}, saveUninitialized: false, resave: false}));
+app.use(session({secret: 'weremakingawebsiteforseveral3dprinters', cookie:{}, saveUninitialized: false, resave: false})); // hide the secret in the process.env?
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
@@ -45,7 +45,7 @@ app.get('/deletePrint', routes.deletePrint)
 
 //Forum routes
 app.get('/forum', routes.dex)
-app.get('/getPosts', routes.getforumposts)
+app.get('/getPosts', routes.getforumposts) // most of your route names are camelcase (editForm) -- but this one's lowercase. Consistency!
 
 app.post('/newPost', routes.newforumpost)
 
@@ -53,8 +53,7 @@ app.post('/newPost', routes.newforumpost)
 app.get('/login', userroutes.login)
 app.get('/logout', userroutes.logout)
 app.get('/check', function(req,res){
-	console.log("checking");
-	console.log(req.session);
+	// get rid of debugging mechanisms before submitting code
 	res.send(req.user)
 })
 // Routes
@@ -74,6 +73,7 @@ app.post('/userCreate', passport.authenticate('local-signup',{
 app.post('/submit', function(req,res){console.log("stahp")})
 
 //Run verification code and import its important functions.
+// should this happen at the top? you use the "verification" variable earlier on.
 var verification = require('./verification.js');
 
 

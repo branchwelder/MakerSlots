@@ -1,11 +1,12 @@
-Print = require("../models/printModel")
-Forum = require("../models/forumModel")
-Announce = require("../models/announcementModel")
-Printer = require("../models/printerModel")
-Users = require("../models/userModel")
+// make sure you use `var`; be consistent w/ your semicolons (a linter could help)
+var Print = require("../models/printModel");
+var Forum = require("../models/forumModel");
+var Announce = require("../models/announcementModel");
+var Printer = require("../models/printerModel");
+var Users = require("../models/userModel");
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
-routes = {} 
+routes = {}
 
 
 routes.index = function(req, res){
@@ -26,33 +27,31 @@ routes.getPrinters = function(req,res) {
 //creates new printer and returns all printers
 routes.newPrinter = function(req, res){
   Users.findOne({name: req.user}, function (err, person) {
-    if(err){
+    if (err) {
       res.send(err)
     };
-    if(person.isNinja == true){
+    // be consistent w/ indentation & spacing -- fixed here, an issue throughout
+    if (person.isNinja == true) {
+      Printer.create({
+        name: req.body.name,
+        status: req.body.status
+      }, function(err, printers) {
+        if (err) {
+          res.send(err)
+        };
 
-
-    Printer.create({
-      name: req.body.name,
-      status: req.body.status
-    }, function(err, printers) {
+        Printer.find(function(err, printer) {
           if (err) {
             res.send(err)
           };
-
-          Printer.find(function(err, printer) {
-            if (err) {
-              res.send(err)
-            };
           res.json(printer);
-          });
-        }
-    );
-  }
-})
+        });
+      });
+    }
+  });
 };
 
-//edit printer 
+//edit printer
 routes.editPrinter = function(req,res){
   Printer.update({
       _id : req.body.id},{$set:{
@@ -181,7 +180,7 @@ routes.editAnnouncement = function(req,res){
 //deletes an announcement
 routes.deleteAnnouncement = function(req,res){
   //removes a print by id, then grabs all the remaining prints and returns them so they can be posted onto the calendar and it can be rerendered.
-  
+
   Users.findOne({name: req.user}, function (err, person) {
     if(err){
       res.send(err)
@@ -232,7 +231,7 @@ routes.newforumpost = function(req, res){
   Forum.create({
     content: req.body.content,
     title: req.body.title,
-    user: req.user 
+    user: req.user
   }, function(err, forum) {
         if (err) {
           res.send(err)
@@ -295,6 +294,7 @@ routes.editPrint = function(req,res){
   //Updates a print through id, though that could be altered to whatever, probably even on-click, which we should see about doing.
   //returns all the prints in the database including the edited one as well as the edited text alone.
   Print.update({
+      // Is there a reason why you can't just $set:req.query? do you have to unpack in place like this?
       _id : req.query.id},{$set:{name: req.query.name,
         email: req.query.email,
         part: req.query.part,
@@ -336,9 +336,7 @@ routes.getPrints = function(req,res){
       res.send(err)
     var events = [];
     for (var i = 0;i<prints.length; i++) {
-      // var title = prints[i].name + 'printing on ' + prints[i].printer//this will be printer name + user
-      // var start = prints[i].dateAndTime
-      // var end = prints[i].endTime
+      // get rid of dead code!
       var event = {title: prints[i].name + ' printing on ' + prints[i].printer, start: prints[i].dateAndTime, end: prints[i].finish, id: prints[i]._id};
       events.push(event)
     }

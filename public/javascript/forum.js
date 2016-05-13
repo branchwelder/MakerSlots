@@ -1,6 +1,9 @@
 var forummodule = angular.module('forummodule', []);
+// I'm 100% ok with you using angular and 100% ok with you using straight-up jquery...
+// but I'm not ok with a combination of the two :/ Refactor to adhere to one design pattern?
 
-
+// I also can't tell how much of this file is in use -- looks like a good portion of it
+// is from the todo app.
 function mainController($scope, $http) {
     $scope.formData = {};
     $scope.commentFormData = {};

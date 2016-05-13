@@ -1,6 +1,6 @@
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
-routes = {}
+var routes = {};
 //Allows logging in and out of user
 routes.login = function(req, res){
 	res.sendfile('/views/login.html', { root: path.join(__dirname, '../') });
