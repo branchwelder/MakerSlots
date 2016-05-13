@@ -11,6 +11,7 @@ var userSchema = mongoose.Schema({
     email: String
 });
 
+// nice use of schema methods!
 // methods ======================
 // generating a hash
 userSchema.methods.generateHash = function(password) {

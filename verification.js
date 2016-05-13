@@ -3,7 +3,7 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local')
 var bcrypt = require('bcryptjs')
 
-//Both of these functions are required to make passport work. 
+//Both of these functions are required to make passport work.
 //We didn't need them to actually do anything, so they don't.
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -26,8 +26,8 @@ passport.use('local-signin', new LocalStrategy(
         done(null, false)
       }
       else if (!user.validPassword(password)) {
-      	//Password doesn't match 
-        return done(null, false); 
+      	//Password doesn't match
+        return done(null, false);
       }
       else {
       	//User is valid
@@ -50,12 +50,12 @@ passport.use('local-signup', new LocalStrategy(
         return done(null, false)
       }
       else{
-        userinfo = req.body
-        user = new User()
-        user.name = userinfo.username;
-        user.email = userinfo.email;
+        userinfo = req.body // redundant... you can just use req.body (see below)
+        var user = new User()
+        user.name = req.body.username;
+        user.email = req.body.email;
         user.isNinja = false;
-    
+
         user.save(function(err){
           if (err){
             // req.session.error = "Error saving user to database"
@@ -71,7 +71,7 @@ passport.use('local-signup', new LocalStrategy(
 // test authentication
 //"next" is the actual function for the route you protect with authentication
 var ensureAuthenticated = function(req, res, next) {
-  if (req.isAuthenticated()) { 
+  if (req.isAuthenticated()) {
     return next(req, res); }
   else{
     res.redirect('/login');
@@ -83,3 +83,7 @@ var ensureAuthenticated = function(req, res, next) {
 //the only export that es actually needed.
 functions = {"ensureAuthenticated": ensureAuthenticated}
 module.exports = functions
+
+// You could also just:
+// modules.exports.ensureAuthenticated = ensureAuthenticated
+// Does the same thing as the previous two lines

@@ -2,7 +2,10 @@ var onSuccess = function(data, status) {
   console.log('added event');
   window.location = "/schedule";
 };
-  
+// The clientside global scope includes *ALL* of your javascript files -- and you're
+// naming your onSuccess and onError callbacks the same thing in three different files.
+// Those functions WILL overlap -- you need to rename so they don't!
+
 var onError = function(data, status) {
   console.log("status", status);
   console.log("error", data);
